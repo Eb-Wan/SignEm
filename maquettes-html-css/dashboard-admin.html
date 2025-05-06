@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignEm</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script src="scripts/scripts.js" defer></script>
+</head>
+<body class="row darkTheme">
+    <nav id="menu" class="autoOpenDesktop menu desktopStatic windowMenu">
+        <ul>
+            <li class="menuItem active"><a href="#">Tableau</a></li>
+            <li class="menuItem"><a href="#">Émargements</a></li>
+            <li class="menuItem"><a href="#">Centres</a></li>
+            <li class="menuItem"><a href="#">Formations</a></li>
+            <li class="menuItem"><a href="#">Sessions</a></li>
+            <li class="menuItem"><a href="#">Formateurs</a></li>
+            <li class="menuItem"><a href="#">Apprenants</a></li>
+            <li class="menuItem"><a href="#">Paramètres</a></li>
+        </ul>
+    </nav>
+    <div class="container w100">
+        <header>
+            <button onclick="toggleMenu('menu'); event.stopPropagation();" class="buttonPrimary lnr lnr-menu" aria-label="Ouvrir le menu"></button>
+            <div class="headerTitle">Tableau Adminstrateur</div>
+        </header>
+        <main>
+            <section class="w100">
+                <div class="title w100 row justifyBetween mobileColumn">
+                    <span class="row alignCenter"><span class="lnr lnr-user mm"></span>John Deer</span>
+                    <span class="row alignCenter"><span class="lnr lnr-calendar-full mm"></span><span class="capitalize" id="todayDate"></span></span>
+                </div>
+                <div class="row justifyBetween">
+                    <button class="buttonPrimary">Faire signer</button>
+                    <button onclick="toggleMenu('filters'); event.stopPropagation();" class="buttonPrimary lnr lnr-magnifier" aria-label="Ouvrir le menu"></button>
+                </div>
+                <div id="filters" class="menu w100 pz static">
+                    <form action="" class="inlineForm">
+                        <span class="textMedium">Rechercher :</span>
+                        <div class="inlineFormField">
+                            <label for="">Du</label>
+                            <input type="date" name="" id="">
+                        </div>
+                        <div class="inlineFormField">
+                            <label for="">Au</label>
+                            <input type="date" name="" id="">
+                        </div>
+                        <div class="inlineFormField">
+                            <label for="">Nom</label>
+                            <select>
+                                <option value="">John Doe</option>
+                                <option value="">Jane Doe</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </section>
+    
+            
+        </main>
+    </div>
+    
+</body>
+</html>

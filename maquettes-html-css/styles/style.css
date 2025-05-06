@@ -1,0 +1,597 @@
+@font-face {
+    font-family:Linearicons-Free;
+    src:url(https://cdn.linearicons.com/free/1.0.0/Linearicons-Free.eot);
+    src:url(https://cdn.linearicons.com/free/1.0.0/Linearicons-Free.eot?#iefix) format('embedded-opentype'),
+    url(https://cdn.linearicons.com/free/1.0.0/Linearicons-Free.woff2) format('woff2'),
+    url(https://cdn.linearicons.com/free/1.0.0/Linearicons-Free.ttf) format('truetype'),
+    url(https://cdn.linearicons.com/free/1.0.0/Linearicons-Free.woff) format('woff'),
+    url(https://cdn.linearicons.com/free/1.0.0/Linearicons-Free.svg#Linearicons-Free) format('svg');
+    font-weight:400;
+    font-style:normal
+}
+
+body {
+    --textColorPrimary: #101010;
+    --textColorSecondary: #EEEEEE;
+
+    --borderColorPrimary: #888888;
+    --borderColorSecondary: #202020;
+
+    --backgroundColorPrimary: #EEEEEE;
+    --backgroundColorSecondary: #202020;
+    --backgroundColorTertiary: #AAAAAA;
+
+    --borderPrimary: 1px solid var(--borderColorPrimary);
+    --borderSecondary: 1px solid var(--borderColorSecondary);
+    --borderRadiusPrimary: 4px;
+
+    --marginLarge: 20px;
+    --marginMedium: 10px;
+    --marginSmall: 5px;
+
+    --paddingLarge: 20px;
+    --paddingMedium: 10px;
+    --paddingSmall: 5px;
+
+    --fontLarge: 24px;
+    --fontMedium: 18px;
+    --fontSmall: 14px;
+
+    font-family: sans-serif;
+    color: var(--textColorPrimary);
+    background-color: var(--backgroundColorPrimary);
+    margin: 0;
+    padding: 0;
+}
+
+.darkTheme {
+    --textColorPrimary: #EEEEEE;
+    --textColorSecondary: #101010;
+
+    --borderColorPrimary: #888888;
+    --borderColorSecondary: #EEEEEE;
+
+    --backgroundColorPrimary: #202020;
+    --backgroundColorSecondary: #EEEEEE;
+    --backgroundColorTertiary: #AAAAAA;
+}
+.darkTheme img {
+    filter: invert();
+}
+main {
+    display: flex;
+    align-items: start;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    width: 100%;
+    
+    gap: var(--paddingMedium);
+}
+.headerTitle {
+    height: 50px;
+    width: 100%;
+    padding: 0 var(--paddingMedium);
+    
+    line-height: 50px;
+    border: var(--borderPrimary);
+    background-color: var(--backgroundColorPrimary);
+    border-radius: var(--borderRadiusPrimary);
+
+    font-size: var(--fontLarge);
+}
+
+.buttonPrimary {
+    line-height: 50px;
+    height: 50px;
+    min-width: 50px;
+
+    padding: 0 var(--paddingMedium);
+
+    border: var(--borderSecondary);
+    color: var(--textColorPrimary);
+    background-color: var(--backgroundColorPrimary);
+    border-radius: var(--borderRadiusPrimary);
+    
+    font-size: var(--fontMedium);
+    font-weight: bold;
+}
+.buttonPrimary:hover {
+    color: var(--textColorSecondary);
+    background-color: var(--backgroundColorSecondary);
+    cursor: pointer;
+}
+.buttonPrimary:not(.lnr):hover { text-decoration: underline; }
+
+.buttonSecondary {
+    line-height: 50px;
+    height: 50px;
+    min-width: 50px;
+    
+    padding: 0 var(--paddingMedium);
+    
+    border: var(--borderSecondary);
+    color: var(--textColorSecondary);
+    background-color: var(--backgroundColorSecondary);
+    border-radius: var(--borderRadiusPrimary);
+
+    font-size: var(--fontMedium);
+    font-weight: bold;
+}
+.buttonSecondary:hover {
+    color: var(--textColorPrimary);
+    background-color: var(--backgroundColorPrimary);
+    cursor: pointer;
+}
+.buttonSecondary:not(.lnr):hover { text-decoration: underline; }
+
+.buttonLink {
+    padding: 0 var(--paddingMedium);
+
+    border: none;
+
+    font-size: var(--fontMedium);
+    font-weight: bold;
+    color: var(--textColorPrimary);
+    background-color: var(--backgroundColorPrimary);
+    text-decoration: underline;
+}
+.buttonLink:hover {
+    background-color: var(--backgroundColorPrimary);
+    cursor: pointer;
+}
+.buttonWindow {
+    position: absolute;
+    top: 0;
+    left: -1px;
+    transform: translate(0, -100%);
+    
+    line-height: 50px;
+    height: 50px;
+    min-width: 50px;
+    
+    padding: 0 var(--paddingMedium);
+    
+    border: var(--borderSecondary);
+    color: var(--textColorPrimary);
+    background-color: var(--backgroundColorPrimary);
+    border-radius: var(--borderRadiusPrimary);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    
+    font-size: var(--fontMedium);
+    font-weight: bold;
+}
+.buttonWindow:hover {
+    color: var(--textColorSecondary);
+    background-color: var(--backgroundColorSecondary);
+    cursor: pointer;
+}
+.buttonWindow:not(.lnr):hover { text-decoration: underline; }
+
+.menu {
+    position: absolute !important;
+    top: 70px;
+    left: var(--marginMedium);
+    
+    display: none;
+    z-index: 1;
+
+    margin: 0;
+    padding: 0;
+
+    height: fit-content;
+    width: fit-content; 
+    font-size: var(--fontSmall);
+    font-weight: bold;
+}
+.menu.static {
+    position: static !important;
+}
+.menu.active {
+    display: block;
+}
+.menu > ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+}
+.menuItem {
+    padding: var(--paddingMedium);
+    color: var(--textColorPrimary);
+}
+.menuItem:not(.menuItem.active) {
+    padding: var(--paddingMedium) var(--paddingLarge);
+}
+.menuItem.active {
+    padding: var(--paddingMedium) var(--paddingSmall);
+    color: var(--textColorSecondary);
+    background-color: var(--backgroundColorSecondary);
+}
+.menuItem.active::before {
+    font-family: Linearicons-Free;
+    content: "\e876";
+}
+.menuItem:hover {
+    color: var(--textColorSecondary);
+    background-color: var(--backgroundColorSecondary);
+    text-decoration: underline;
+}
+.menuItem:not(:last-child) {
+    border-bottom: var(--borderSecondary);
+}
+.menuItem > a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+@media (min-width: 1024px) {
+    .menu.desktopStatic {
+        position: static !important;
+    }
+}
+.windowMenu {
+    position: relative;
+    border: var(--borderSecondary);
+    background-color: var(--backgroundColorPrimary);
+    border-radius: var(--borderRadiusPrimary);
+}
+.window {
+    position: relative;
+    border: var(--borderPrimary);
+    background-color: var(--backgroundColorPrimary);
+    border-radius: var(--borderRadiusPrimary);
+}
+.windowButtons {
+    position: absolute;
+    left: -1px;
+    top: -50px;
+
+    display: flex;
+    align-items: center;
+
+    height: 50px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: var(--borderSecondary);
+    border-radius: var(--borderRadiusPrimary);
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.windowButtons > *{
+    margin: 0;
+    border: none;
+    border-radius: 0px;
+}
+.windowButtons > *:not(:first-child){
+    border-left: var(--borderSecondary);
+}
+.windowWButton {
+    border-top-left-radius: 0px;
+    margin-top: calc(50px + var(--marginMedium));
+    margin-bottom: var(--marginMedium);
+}
+
+.container {
+    margin: var(--marginMedium);
+    padding: var(--paddingMedium);
+    width: 100%;
+    box-sizing: border-box;
+}
+.row {
+    display: flex !important;
+    height: 50px;
+}
+.title {
+    font-size: var(--fontLarge);
+    font-weight: bold;
+    margin: var(--marginMedium) 0;
+}
+
+
+.textSmall { font-size: var(--fontSmall); }
+.textMedium { font-size: var(--fontMedium); }
+.textLarge { font-size: var(--fontLarge); }
+
+.textBold { font-weight: bold; }
+
+.textCentered { text-align: center; }
+.textLeft { text-align: left; }
+.textRight { text-align: right; }
+
+.textGreen { color: green; }
+.textRed { color: red; }
+
+.centered {
+    display: block;
+    margin: auto !important;
+}
+.left {
+    display: block;
+    margin: auto auto auto 0 !important;
+}
+.right {
+    display: block;
+    margin: auto 0 auto auto !important;
+}
+
+.justifyRight { justify-content: right !important; }
+.justifyCenter { justify-content: center !important; }
+.justifyLeft{ justify-content: left !important; }
+.justifyAround{ justify-content: space-around !important; }
+.justifyBetween{ justify-content: space-between !important; }
+
+.alignCenter { align-items: center !important; }
+.alignStart { align-items: start !important; }
+.alignEnd { align-self: end !important; }
+
+.mz { margin: 0 !important; }
+.ms { margin: var(--marginSmall) !important; }
+.mm { margin: var(--marginMedium) !important; }
+.ml { margin: var(--marginLarge) !important; }
+
+.mym { margin: var(--marginMedium) 0 !important; }
+.myl { margin: var(--marginLarge) 0 !important; }
+
+.pz { padding: 0 !important; }
+.ps { padding: var(--paddingSmall) !important; }
+.pm { padding: var(--paddingMedium) !important; }
+.pl { padding: var(--paddingLarge) !important; }
+
+.gm { gap: var(--marginMedium) !important; }
+
+.w12 { width: 12.5% !important; }
+.w25 { width: 25% !important; }
+.w33 { width: 33% !important; }
+.w50 { width: 50% !important; }
+.w66 { width: 66% !important; }
+.w75 { width: 75% !important; }
+.w100 { width: 100% !important; }
+.wfc { width: fit-content !important; }
+
+.h100 { height: 100% !important; }
+.hfc { height: fit-content !important;}
+.hm { height: 50px !important; }
+.hl { height: 70px !important; }
+
+.flexGrow { flex-grow: 1 !important; }
+
+.capitalize { text-transform: capitalize; }
+
+@media (max-width: 1024px) {
+    .mobileColumn {
+        flex-direction: column !important;
+        height: fit-content !important;
+    }
+    .mobileWidth100 {
+        width: 100%;
+    }
+}
+
+
+.inlineForm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+    width: 100%;
+    height: fit-content;
+
+    padding: 0;
+    margin: var(--marginMedium) auto;
+
+    border: var(--borderSecondary);
+    border-radius: var(--borderRadiusPrimary);
+    box-sizing: border-box;
+}
+.inlineForm > * {
+    padding: 0 var(--paddingMedium);
+    flex-grow: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+.inlineForm * {
+    height: 48px;
+    line-height: 50px;
+}
+.inlineForm .inlineFormField {
+    display: flex;
+    align-items: center;
+
+    gap: var(--marginMedium);
+
+    background-color: var(--backgroundColorPrimary);
+    font-size: var(--fontMedium);
+    color: var(--textColorPrimary);
+    font-weight: normal;
+}
+.inlineForm input, select {
+    height: 48px;
+    flex-grow: 1;
+    border: none;
+    background-color: var(--backgroundColorPrimary);
+    font-size: var(--fontMedium);
+    color: var(--textColorPrimary);
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+}
+
+@media (min-width: 1024px) {
+    .inlineForm {
+        flex-direction: row;
+        height: 50px;
+    }
+    .inlineForm > *:not(:first-child){
+        border-left: var(--borderSecondary);
+        padding: 0 var(--paddingMedium);
+    }
+}
+
+table {
+    margin: var(--marginMedium) 0;
+    width: 100%;
+    
+    border-top: var(--borderPrimary);
+    border-left: var(--borderPrimary);
+    border-right: var(--borderPrimary);
+    border-radius: var(--borderRadiusPrimary);
+    border-spacing: 0;
+}
+thead {
+    border-bottom: var(--borderPrimary);
+    font-size: var(--fontMedium);
+    font-weight: bold;
+}
+td {
+    box-sizing: border-box;
+    height: 30px;
+    line-height: 30px;
+    width: fit-content;
+    padding: var(--paddingMedium);
+    border-bottom: var(--borderPrimary);
+}
+td * {
+    vertical-align: middle;
+}
+td:not(:last-child) {
+    border-right: var(--borderPrimary);
+}
+
+.formPrimary {
+    position: relative;
+    display: block;
+    margin: var(--marginLarge) auto;
+    max-width: 640px;
+    background-color: var(--backgroundColorPrimary);
+    border: var(--borderPrimary);
+    border-radius: var(--borderRadiusPrimary);
+    padding: var(--paddingMedium);
+}
+.formTitle {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--backgroundColorPrimary);
+    padding: var(--paddingSmall);
+    font-size: var(--fontLarge);
+    line-height: var(--fontLarge);
+}
+.formField {
+    width: 100%; 
+    margin: 0 0 var(--marginMedium) 0;
+    box-sizing: border-box;
+}
+.formFieldWButton > :nth-child(1) {
+    border-radius: var(--borderRadiusPrimary) 0 0 var(--borderRadiusPrimary);
+    width: 80%;
+    margin: 0;
+    vertical-align: middle;
+}
+.formFieldWButton > :nth-child(2) {
+    width: 20%;
+    height: 30px;
+    border-radius: 0 var(--borderRadiusPrimary) var(--borderRadiusPrimary) 0;
+    margin: 0;
+    padding: 0;
+    border: var(--borderSecondary);
+    font-size: var(--fontLarge);
+    background: var(--backgroundColorPrimary);
+    vertical-align: middle;
+}
+.formFieldWButton > :nth-child(2):hover {
+
+}
+.formFieldWButton > :nth-child(2):active {
+
+}
+.formFieldLabel {
+    display: block;
+    font-size: var(--fontMedium);
+    margin: var(--paddingMedium);
+}
+.formFieldRadioLabel {
+    font-size: var(--fontMedium);
+}
+.formFieldRadioLabel > * {
+    vertical-align: bottom;
+}
+.formFieldInput {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100%;
+    height: 30px;
+    background: var(--backgroundColorPrimary);
+    border: var(--borderSecondary);
+    border-radius: var(--borderRadiusPrimary);
+    font-size: var(--fontMedium);
+    padding: 0 var(--paddingMedium);
+    color: var(--textColorPrimary);
+}
+.formFieldInput[type=radio] {
+    height: 25px;
+    width: 25px;
+}
+.formFieldInput[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+textarea.formFieldInput {
+    padding: var(--paddingMedium);
+    height: 10em;
+    vertical-align: baseline;
+}
+.formFieldSection {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    white-space: no-wrap;
+}
+/* 
+.errorMessage {
+    display: block;
+    padding: 10px;
+    margin: 20px auto 20px auto;
+    max-width: 640px;
+    border: var(--secondaryColor) 1px solid;
+    border-radius: 8px;
+    background-color: var(--tertiaryColor);
+    color: var(--primaryTextColor);
+    text-align: center;
+}
+
+.infoMessage {
+    display: block;
+    padding: 10px;
+    margin: 20px auto 20px auto;
+    max-width: 640px;
+    border: var(--secondaryBlueColor) 1px solid;
+    border-radius: 8px;
+    background-color: var(--tertiaryBlueColor);
+    color: var(--primaryBlueTextColor);
+    text-align: center;
+} */
+
+@media (min-width:1024px) {
+    .menuContents {
+        background: none;
+    }
+    .formFieldSection {
+        display: inline-flex;
+        width: 60%;
+    }
+    .formFieldLabel {
+        display: inline-block;
+        min-width: 30%;
+    }
+}

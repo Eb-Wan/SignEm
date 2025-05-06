@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignEm</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script src="scripts/scripts.js" defer></script>
+    <script defer>
+        function fetchCodePostal (codePostal) {
+            if (codePostal.length != 5) return;
+            fetch("https://apicarto.ign.fr/api/codes-postaux/communes/"+codePostal)
+            .then(response => response.json())
+            .then(data => {
+                if (typeof(data['0']) != "object") return;
+                let options = "";
+                data.forEach(e => options += `<option value="${e.libelleAcheminement}">${e.nomCommune}</option>`);
+                document.getElementById("codePostalSelect").innerHTML = options;
+            })
+            .catch(error => console.error(error));
+        }
+    </script>
+</head>
+<body class="row pm gm darkTheme">
+    <nav id="menu" class="autoOpenDesktop menu desktopStatic windowMenu">
+        <ul>
+            <li class="menuItem"><a href="/dashboard-formateur.html">Aujourd'hui</a></li>
+            <li class="menuItem"><a href="/emargement-formateur.html">Émargements</a></li>
+            <li class="menuItem active"><a href="#">Paramètres</a></li>
+            <li class="menuItem"><a href="#">Se déconnecter</a></li>
+        </ul>
+    </nav>
+    <div class="flexGrow">
+        <header>
+            <button onclick="toggleMenu('menu'); event.stopPropagation();" class="buttonPrimary lnr lnr-menu" title="Ouvrir/fermer le menu" aria-label="Ouvrir/fermer le menu"></button>
+            <div class="headerTitle">Paramètres</div>
+        </header>
+        <main>
+            <section class="w100 mym">
+                <form onsubmit="event.preventDefault();" class="formPrimary">
+                    <div class="formTitle">Général</div>
+                    <div class="formField">
+                        <label for="" class="formFieldLabel">Taille de l'interface :</label>
+                        <select name="" id="" class="formFieldSection formFieldInput">
+                            <option value="">Petite</option>
+                            <option value="" selected>Moyenne (par défaut)</option>
+                            <option value="">Grande</option>
+                        </select>
+                    </div>
+                    <div class="formField">
+                        <label for="" class="formFieldLabel">Thème :</label>
+                        <select name="" id="" class="formFieldSection formFieldInput">
+                            <option value="" selected>Document Clair (par défaut)</option>
+                            <option value="">Document Nuit</option>
+                            <option value="">Contraste Clair</option>
+                            <option value="">Contraste Nuit</option>
+                            <option value="">Océan Clair</option>
+                            <option value="">Océan Nuit</option>
+                            <option value="">Prairie Clair</option>
+                            <option value="">Prairie Nuit</option>
+                            <option value="">Mars Clair</option>
+                            <option value="">Mars Nuit</option>
+                        </select>
+                    </div>
+                    <div class="row ml mobileColumn justifyBetween gm">
+                        <button type="submit" class="buttonSecondary centered">Appliquer les changements</button>
+                    </div>
+                </form>
+                <form onsubmit="event.preventDefault();" class="formPrimary">
+                    <div class="formTitle">Mon compte</div>
+                    <div class="textMedium pm">Nom - Prénom du compte : John Deer</div>
+
+                    <div class="formField">
+                        <label for="" class="formFieldLabel">Adresse Email :</label>
+                        <input class="formFieldSection formFieldInput" value="johndeer@email.com"></input>
+                    </div>
+                    <div class="formField mobileColumn">
+                        <div class="formFieldLabel">Code Postal - Ville :</div>
+                        <div class="formFieldSection">
+                            <input class="formFieldInput w33" max="99999" onkeyup="fetchCodePostal(event.target.value);" type="number" aria-label="Code Postal" placeholder="Code Postal" value="65100"></input>
+                            <select id="codePostalSelect" class="formFieldInput flexGrow" name="" id="" aria-label="Ville">
+                                <option value="LESANGLES">Les Angles</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="formField">
+                        <label for="" class="formFieldLabel">Adresse :</label>
+                        <input class="formFieldSection formFieldInput" value="123 Rue Paumé"></input>
+                    </div>
+                    <div class="formField">
+                        <label for="" class="formFieldLabel">Téléphone</label>
+                        <input type="tel" pattern="[0-0]{1}[5-7]{1}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" value="06-12-34-56-78" class="formFieldSection formFieldInput"></input>
+                    </div>
+                    <div class="row ml mobileColumn justifyBetween gm">
+                        <button type="button" class="buttonPrimary centered">Changer de mot de passe</button>
+                        <button type="submit" class="buttonSecondary centered">Appliquer les changements</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

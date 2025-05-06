@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignEm</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script src="scripts/scripts.js" defer></script>
+</head>
+<body class="row pm gm darkTheme">
+    <nav id="menu" class="autoOpenDesktop menu desktopStatic windowMenu">
+        <ul>
+            <li class="menuItem active"><a href="#">Aujourd'hui</a></li>
+            <li class="menuItem"><a href="/emargement-formateur.html">Émargements</a></li>
+            <li class="menuItem"><a href="/parametres.html">Paramètres</a></li>
+            <li class="menuItem"><a href="#">Se déconnecter</a></li>
+        </ul>
+    </nav>
+    <div class="flexGrow">
+        <header>
+            <button onclick="toggleMenu('menu'); event.stopPropagation();" class="buttonPrimary lnr lnr-menu" title="Ouvrir/fermer le menu" aria-label="Ouvrir/fermer le menu"></button>
+            <div class="headerTitle">Tableau de bord</div>
+        </header>
+        <main>
+            <section class="w100">
+                <div class="title w100 row justifyBetween mobileColumn">
+                    <span class="row alignCenter"><span title="Compte" class="lnr lnr-user mm"></span>John Deer</span>
+                    <span class="row alignCenter"><span title="Aujourd'hui" class="lnr lnr-calendar-full mm"></span><span class="capitalize" id="todayDate"></span></span>
+                </div>
+                <div class="row justifyBetween">
+                    <button class="buttonPrimary">Tout faire signer</button>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Apprenant</td>
+                            <td>Matin</td>
+                            <td>Après midi</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Cena</td>
+                            <td><span title="A signé" class="textGreen lnr lnr-chevron-down textLarge"></span></td>
+                            <td><span title="N'a pas signé" class="textRed lnr lnr-cross textLarge"></span><button class="buttonLink">Faire signer</button></td>
+                        </tr>
+                        <tr>
+                            <td>John Coltrane</td>
+                            <td><span title="A signé" class="textGreen lnr lnr-chevron-down textLarge"></span></td>
+                            <td><span title="A signé" class="textGreen lnr lnr-chevron-down textLarge"></span></td>
+                        </tr>
+                        <tr>
+                            <td>John Petrucci</td>
+                            <td><span title="A signé" class="textGreen lnr lnr-chevron-down textLarge"></span></td>
+                            <td><span title="A signé" class="textGreen lnr lnr-chevron-down textLarge"></span></td>
+                        </tr><tr>
+                            <td>John Myung</td>
+                            <td><span title="A signé" class="textGreen lnr lnr-chevron-down textLarge"></span></td>
+                            <td><span title="A signé" class="textGreen lnr lnr-chevron-down textLarge"></span></td>
+                        </tr>
+                        <tr>
+                            <td>John Wick</td>
+                            <td><span title="N'a pas signé" class="textRed lnr lnr-cross textLarge"></span><span class="ms">Absence</span></td>
+                            <td><span title="N'a pas signé" class="textRed lnr lnr-cross textLarge"></span><span class="ms">Absence</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
