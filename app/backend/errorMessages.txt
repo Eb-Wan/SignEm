@@ -1,0 +1,24 @@
+000: Ignore;
+010: Success;
+020: Something unexpected happened;
+030: Nothing happened
+
+100: Invalid input;
+110: Missing fields;
+120: Invalid captcha;
+
+200: Athentification Error;
+210: Unidentified user;
+220: Wrong email or password;
+230: User already exists;
+240: No access rights;
+250: Athentification Error : Invalid token;
+
+300: ;
+
+400: Ressource not found;
+410: User not found;
+500: ;
+600: ;
+700: ;
+800: ;
