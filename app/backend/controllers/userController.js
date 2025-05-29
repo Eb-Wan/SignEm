@@ -1,25 +1,23 @@
 import Exeption from "../classes/exeption.js";
-import { userModel } from "../models/userModel.js";
+import compteModele from "../models/compteModele.js";
 
-import mongoose from "mongoose";
 import axios from "axios";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { json } from "express";
 
 const generateToken = (id) => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "12h" });
 
 export const createFirstAccount = async (req, res, next) => {
     try {
-        const count = await userModel.countDocuments({});
+        const count = await compteModele.countDocuments({});
         if (count > 0) throw new Exeption("030", "", true);
-        const { firstName, lastName, email, phone, password } = req.body;
+        const { nom, prenom, email, tel, mdp } = req.body;
 
-        if (!(firstName && lastName && email && phone && password)) throw new Exeption(110, "", true);
+        if (!(nom && prenom && email && tel && mdp)) throw new Exeption(110, "", true);
         
         const salt = await bcrypt.genSalt(8);
-        const hashedPass = await bcrypt.hash(password, salt);
-        const user = await userModel.create({ firstName, lastName, email, phone, password: hashedPass });
+        const hashedPass = await bcrypt.hash(mdp, salt);
+        const user = await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass });
 
         res.status(201).json({ success: true });
     } catch (error) {
@@ -30,10 +28,13 @@ export const createFirstAccount = async (req, res, next) => {
 
 export const list = async (req, res, next) => {
     try {
-        //add queries here
-        
-        const users = await userModel.find({}, "firstName lastName email phone");
-        res.status(200).json({ success: true, users })
+        const { nom, prenom, email, tel } = req.query;
+        let users;
+        if (req.user.role === "administateur") users = await compteModele.find({ nom, prenom, email, tel }, "nom prenom email tel");
+        else if (req.user.role === "formateur") users = await compteModele.find({ nom, prenom, email }, "nom prenom email");
+        else throw new Exeption("240", "", true);
+        if (!users) throw Exeption("410", "", true);
+        res.status(200).json({ success: true, users });
     } catch (error) {
         next(error);
     }
@@ -41,17 +42,17 @@ export const list = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
     try {
-        const { email, password, captchaToken } = req.body;
+        const { email, mdp, captchaToken } = req.body;
 
         const isProd = process.env.PROD_ENV === "true";
         const captchaUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET}&response=${captchaToken}`;
         const captcha = await axios.post(captchaUrl);
 
         if (!captcha.data.success && isProd) throw new Exeption("120", "", true);
-        if (!(email && password)) throw new Exeption("110", "", true);
+        if (!(email && mdp)) throw new Exeption("110", "", true);
 
-        const user = await userModel.findOne(email);
-        const passMatch = user ? await bcrypt.compare(password, user.password):false;
+        const user = await compteModele.findOne(email);
+        const passMatch = user ? await bcrypt.compare(mdp, user.mdp):false;
         
         if (!passMatch) throw new Exeption("220", "", true);
 
@@ -82,12 +83,12 @@ export const getRole = async (req, res, next) => {
 };
 export const userUpdate = async (req, res, next) => {
     try {
-        const { email, phone } = req.body;
+        const { email, tel } = req.body;
         const user = req.user;
         
         if (!user) throw new Exeption("410", "", true);
         
-        await userModel.findByIdAndUpdate(user.id, { email, phone });
+        await compteModele.findByIdAndUpdate(user.id, { email, tel });
         res.status(200).json({ success: true });
     } catch (error) {
         if (error.code && error.code === 11000) error = new Exeption("230", "", true)
@@ -97,14 +98,14 @@ export const userUpdate = async (req, res, next) => {
 
 export const adminRegister = async (req, res, next) => {
     try {
-        const { firstName, lastName, email, phone, password } = req.body;
+        const { nom, prenom, email, tel, mdp } = req.body;
 
         if (!captcha.data.success && isProd) throw new Exeption("120", true);
-        if (!(firstName && lastName && email && phone && password)) throw new Exeption("110", "", true);
+        if (!(nom && prenom && email && tel && mdp)) throw new Exeption("110", "", true);
         
         const salt = await bcrypt.genSalt(8);
-        const hashedPass = await bcrypt.hash(password, salt);
-        const user = await userModel.create({ firstName, lastName, email, phone, password: hashedPass });
+        const hashedPass = await bcrypt.hash(mdp, salt);
+        await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass });
 
         res.status(201).json({ success: true });
     } catch (error) {
@@ -114,16 +115,16 @@ export const adminRegister = async (req, res, next) => {
 };
 export const adminUpdate = async (req, res, next) => {
     try {
-        const { firstName, lastName, email, phone } = req.body;
+        const { nom, prenom, email, tel } = req.body;
         const { id } = req.param;
 
-        if (!(firstName && lastName && email && phone && password)) throw new Exeption("110", "", true);
+        if (!(nom && prenom && email && tel && mdp)) throw new Exeption("110", "", true);
 
-        const user = await userModel.findByIdAndUpdate(id, { firstName, lastName, email, phone });
+        const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel });
         if (user) throw new Exeption("410", "", true);
         res.status(200).json({ success: true });
     } catch (error) {
-        if (error.code && error.code === 11000) error = new Exeption(230, "", true)
+        if (error.code && error.code === 11000) error = new Exeption("230", "", true);
         next(error);
     }
 };
@@ -132,9 +133,9 @@ export const adminRemove = async (req, res, next) => {
     try {
         const { id } = req.param;
 
-        if (await userModel.findById(id)) throw new Exeption("210" , "", true);
+        if (await compteModele.findById(id)) throw new Exeption("210" , "", true);
         
-        const user = await userModel.findByIdAndRemove(id);
+        const user = await compteModele.findByIdAndRemove(id);
         if (user) throw new Exeption("410", "", true);
         res.status(200).json({ success: true });
     } catch (error) {

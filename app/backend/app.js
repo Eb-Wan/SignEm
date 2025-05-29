@@ -13,7 +13,11 @@ import Exeption from "./classes/exeption.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import { connectDB } from "./config/db.js";
 // import cloudinaryConfig from "./config/cloudinary";
-import userRoutes from "./routes/userRoutes.js";
+import compteRoutes from "./routes/compteRoutes.js";
+import centreRoutes from "./routes/centreRoutes.js";
+import formationRoutes from "./routes/formationRoutes.js";
+import sessionRoutes from "./routes/sessionRoutes.js";
+import emargement from "./routes/emargementRoutes.js";
 
 connectDB();
 // cloudinaryConfig();
@@ -27,7 +31,11 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 app.use(cookieParser());
-app.use("/api/user", userRoutes);
+app.use("/api/compte", compteRoutes);
+app.use("/api/centre", centreRoutes);
+app.use("/api/formation", formationRoutes);
+app.use("/api/session", sessionRoutes);
+// app.use("/api/emargement", emargementRoutes);
 
 app.use(errorMiddleware);
 
