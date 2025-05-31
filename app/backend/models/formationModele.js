@@ -5,5 +5,5 @@ const formationSchema = mongoose.Schema({
     ouverte: { type: Boolean }
 });
 
-const formationModele = mongoose.model("centres", formationSchema);
+const formationModele = mongoose.model("formations", formationSchema);
 export default formationModele;

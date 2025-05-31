@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignEm</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script src="scripts/scripts.js" defer></script>
+    <script src="scripts/table.js" defer type="module"></script>
+
+    <script type="module" defer>
+        import {Table} from "./scripts/table.js";
+        
+        const head = ["Jour", "Signature matin", "Signature après-midi", "Nom formateur", "Signature formateur"];
+        const body = [
+            ["06/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["07/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["08/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["09/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["10/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">']
+        ]
+        const table1 = new Table(head, body, "emargement1", "table1");
+    </script>
+
+</head>
+<body class="row pm gm darkTheme">
+    <nav id="menu" class="autoOpenDesktop menu desktopStatic windowMenu">
+        <ul>
+            <li class="menuItem active"><a href="/dashboard-admin.html">Aujourd'hui</a></li>
+            <li class="menuItem"><a href="/emargement-admin.html">Émargements</a></li>
+            <li class="menuItem"><a href="/centres-admin.html">Centres</a></li>
+            <li class="menuItem"><a href="/formations-admin.html">Formations</a></li>
+            <li class="menuItem"><a href="/sessions-admin.html">Sessions</a></li>
+            <li class="menuItem"><a href="/comptes-admin.html">Comptes</a></li>
+            <li class="menuItem"><a href="/parametres-admin.html">Paramètres</a></li>
+            <li class="menuItem"><a href="#">Se déconnecter</a></li>
+        </ul>
+    </nav>
+    <div class="flexGrow">
+        <header>
+            <button onclick="toggleMenu('menu'); event.stopPropagation();" class="buttonPrimary lnr lnr-menu" title="Ouvrir/fermer le menu" aria-label="Ouvrir/fermer le menu"></button>
+            <div class="headerTitle">Aujourd'hui</div>
+        </header>
+        <main>
+            <section class="w100">
+                <div class="row justifyBetween mym mobileColumn">
+                    <button class="buttonSecondary">Télécharger la liste</button>
+                    <span class="row gm mym justifyBetween">
+                        <span>
+                            <span class="textMedium">Apprenant : </span>
+                            <select class="buttonPrimary">
+                                <option value="">Tous</option>
+                                <option value="">John Cena</option>
+                                <option value="">John Coltrane</option>
+                                <option value="">John Petrucci</option>
+                                <option value="">John Myung</option>
+                                <option value="">John Wick</option>
+                            </select>
+                        </span>
+                        <button onclick="toggleMenu('filters'); event.stopPropagation();" class="buttonPrimary lnr lnr-magnifier" aria-label="Ouvrir le menu"></button>
+                    </span>
+                </div>
+                <div id="filters" class="menu w100 pz static">
+                    <form action="" class="inlineForm">
+                        <span class="textMedium">Rechercher :</span>
+                        <div class="inlineFormField">
+                            <label for="">Du</label>
+                            <input id="dateFrom" type="date" name="" id="">
+                        </div>
+                        <div class="inlineFormField">
+                            <label for="">Au</label>
+                            <input id="dateTo" type="date" name="" id="">
+                        </div>
+                    </form>
+                </div>
+                
+        </main>
+    </div>
+</body>
+</html>

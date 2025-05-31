@@ -6,7 +6,7 @@
     <title>SignEm</title>
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
-    <script src="scripts/scripts.js" defer></script>
+    <script src="./scripts/scripts.js" defer></script>
     <script defer>
         function fetchCodePostal (codePostal) {
             if (codePostal.length != 5) return;
@@ -25,9 +25,13 @@
 <body class="row pm gm darkTheme">
     <nav id="menu" class="autoOpenDesktop menu desktopStatic windowMenu">
         <ul>
-            <li class="menuItem"><a href="/dashboard-formateur.html">Aujourd'hui</a></li>
-            <li class="menuItem"><a href="/emargement-formateur.html">Émargements</a></li>
-            <li class="menuItem active"><a href="#">Paramètres</a></li>
+            <li class="menuItem"><a href="./dashboard-admin.html">Aujourd'hui</a></li>
+            <li class="menuItem"><a href="./emargement-admin.html">Émargements</a></li>
+            <li class="menuItem"><a href="./centres-admin.html">Centres</a></li>
+            <li class="menuItem"><a href="./formations-admin.html">Formations</a></li>
+            <li class="menuItem"><a href="./sessions-admin.html">Sessions</a></li>
+            <li class="menuItem"><a href="./comptes-admin.html">Comptes</a></li>
+            <li class="menuItem active"><a href="./parametres-admin.html">Paramètres</a></li>
             <li class="menuItem"><a href="#">Se déconnecter</a></li>
         </ul>
     </nav>

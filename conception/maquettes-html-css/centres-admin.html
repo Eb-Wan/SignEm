@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignEm</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <script src="./scripts/scripts.js" defer></script>
+    <script src="./scripts/table.js" defer type="module"></script>
+
+    <script type="module" defer>
+        import {Table} from "./scripts/table.js";
+        
+        const head = ["Jour", "Signature matin", "Signature après-midi", "Nom formateur", "Signature formateur"];
+        const body = [
+            ["06/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["07/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["08/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["09/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">'],
+            ["10/04/2025", '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', '<img class="hl centered" src="/assets/Signature.png" alt="Signature apprenant">', "John Deer", '<img class="hl centered" src="/assets/Signature.png" alt="Signature formateur">']
+        ]
+        const table1 = new Table(head, body, "emargement1", "table1");
+    </script>
+
+</head>
+<body class="row pm gm darkTheme">
+    <nav id="menu" class="autoOpenDesktop menu desktopStatic windowMenu">
+        <ul>
+            <li class="menuItem active"><a href="./dashboard-admin.html">Aujourd'hui</a></li>
+            <li class="menuItem"><a href="./emargement-admin.html">Émargements</a></li>
+            <li class="menuItem"><a href="./centres-admin.html">Centres</a></li>
+            <li class="menuItem"><a href="./formations-admin.html">Formations</a></li>
+            <li class="menuItem"><a href="./sessions-admin.html">Sessions</a></li>
+            <li class="menuItem"><a href="./comptes-admin.html">Comptes</a></li>
+            <li class="menuItem"><a href="./parametres-admin.html">Paramètres</a></li>
+            <li class="menuItem"><a href="#">Se déconnecter</a></li>
+        </ul>
+    </nav>
+    <div class="flexGrow">
+        <header>
+            <button onclick="toggleMenu('menu'); event.stopPropagation();" class="buttonPrimary lnr lnr-menu" title="Ouvrir/fermer le menu" aria-label="Ouvrir/fermer le menu"></button>
+            <div class="headerTitle">Centres</div>
+        </header>
+        <main>
+            <section class="w100">
+                <div class="row justifyBetween mym mobileColumn">
+                    <button class="buttonSecondary">Ajouter</button>
+                </div>
+                <div>
+                    <!--
+                        Create an item list class 
+                        Row with 50px strict height and buttons on the other side
+                        Think about mobile overflow 
+                    -->
+                </div>
+        </main>
+    </div>
+</body>
+</html>

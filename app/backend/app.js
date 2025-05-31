@@ -17,7 +17,7 @@ import compteRoutes from "./routes/compteRoutes.js";
 import centreRoutes from "./routes/centreRoutes.js";
 import formationRoutes from "./routes/formationRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
-import emargement from "./routes/emargementRoutes.js";
+// import emargement from "./routes/emargementRoutes.js";
 
 connectDB();
 // cloudinaryConfig();

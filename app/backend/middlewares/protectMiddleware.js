@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import Exeption from "../classes/exeption.js";
-import { userModel } from "../models/userModel.js";
+import compteModele from "../models/compteModele.js";
 
 export const authMiddleware = async (req, res, next) => {
     try {
@@ -10,7 +10,7 @@ export const authMiddleware = async (req, res, next) => {
         const { id } = jwt.decode(token)
         if (!id) throw new Exeption("250", "", true);
     
-        const user = await userModel.findById(id).select("-password -email");
+        const user = await compteModele.findById(id).select("-password -email");
         if (!user) throw new Exeption("250", "", true);
     
         req.user = user;

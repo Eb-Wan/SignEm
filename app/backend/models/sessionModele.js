@@ -8,5 +8,5 @@ const sessionSchema = mongoose.Schema({
     dateFin: { type: Date }
 });
 
-const sessionModele = mongoose.model("centres", sessionSchema);
+const sessionModele = mongoose.model("sessions", sessionSchema);
 export default sessionModele;

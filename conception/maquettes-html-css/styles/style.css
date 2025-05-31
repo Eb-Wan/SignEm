@@ -12,14 +12,15 @@
 
 body {
     --textColorPrimary: #101010;
-    --textColorSecondary: #EEEEEE;
+    --textColorSecondary: #FFF8F0;
+    --textColorTertiary: #C05010;
 
     --borderColorPrimary: #888888;
-    --borderColorSecondary: #202020;
+    --borderColorSecondary: #C05010;
 
-    --backgroundColorPrimary: #EEEEEE;
-    --backgroundColorSecondary: #202020;
-    --backgroundColorTertiary: #AAAAAA;
+    --backgroundColorPrimary: #FFFFF0;
+    --backgroundColorSecondary: #C05010;
+    --backgroundColorTertiary: #CCCCCC;
 
     --borderPrimary: 1px solid var(--borderColorPrimary);
     --borderSecondary: 1px solid var(--borderColorSecondary);
@@ -45,19 +46,24 @@ body {
 }
 
 .darkTheme {
-    --textColorPrimary: #EEEEEE;
-    --textColorSecondary: #101010;
+    --textColorPrimary: #FFFFFF;
+    --textColorSecondary: #000000;
 
-    --borderColorPrimary: #888888;
-    --borderColorSecondary: #EEEEEE;
+    --borderColorPrimary: #A0A0A0;
+    --borderColorSecondary: #FFC060;
 
-    --backgroundColorPrimary: #202020;
-    --backgroundColorSecondary: #EEEEEE;
-    --backgroundColorTertiary: #AAAAAA;
+    --backgroundColorPrimary: #151010;
+    --backgroundColorSecondary: #FFC060;
+    --backgroundColorTertiary: #303030;
 }
 .darkTheme img {
     filter: invert();
 }
+
+input, select, button {
+    outline: none;
+}
+
 main {
     display: flex;
     align-items: start;
@@ -101,6 +107,7 @@ header {
     
     font-size: var(--fontMedium);
     font-weight: bold;
+    outline: none;
 }
 .buttonPrimary:hover {
     color: var(--textColorSecondary);
@@ -123,6 +130,7 @@ header {
 
     font-size: var(--fontMedium);
     font-weight: bold;
+    outline: none;
 }
 .buttonSecondary:hover {
     color: var(--textColorPrimary);
@@ -141,6 +149,7 @@ header {
     color: var(--textColorPrimary);
     background-color: var(--backgroundColorPrimary);
     text-decoration: underline;
+    outline: none;
 }
 .buttonLink:hover {
     background-color: var(--backgroundColorPrimary);
@@ -167,6 +176,7 @@ header {
     
     font-size: var(--fontMedium);
     font-weight: bold;
+    outline: none;
 }
 .buttonWindow:hover {
     color: var(--textColorSecondary);
@@ -279,6 +289,9 @@ header {
     margin-bottom: var(--marginMedium);
 }
 
+.zebra > :nth-child(odd) {
+    background-color: var(--backgroundColorTertiary);
+}
 .container {
     margin: var(--marginMedium);
     padding: var(--paddingMedium);
@@ -287,7 +300,8 @@ header {
 }
 .row {
     display: flex !important;
-    height: 50px;
+    height: fit-content;
+    min-width: 50px;
 }
 .title {
     font-size: var(--fontLarge);
@@ -381,13 +395,13 @@ header {
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-
+    
     width: 100%;
     height: fit-content;
-
+    
     padding: 0;
     margin: var(--marginMedium) auto;
-
+    
     border: var(--borderSecondary);
     border-radius: var(--borderRadiusPrimary);
     box-sizing: border-box;
@@ -405,9 +419,9 @@ header {
 .inlineForm .inlineFormField {
     display: flex;
     align-items: center;
-
+    
     gap: var(--marginMedium);
-
+    
     background-color: var(--backgroundColorPrimary);
     font-size: var(--fontMedium);
     color: var(--textColorPrimary);
@@ -428,7 +442,7 @@ header {
 @media (min-width: 1024px) {
     .inlineForm {
         flex-direction: row;
-        height: 50px;
+        /* height: 50px; */
     }
     .inlineForm > *:not(:first-child){
         border-left: var(--borderSecondary);
@@ -446,24 +460,35 @@ table {
     border-radius: var(--borderRadiusPrimary);
     border-spacing: 0;
 }
-thead {
-    border-bottom: var(--borderPrimary);
-    font-size: var(--fontMedium);
+th {
     font-weight: bold;
 }
-td {
+td, th {
     box-sizing: border-box;
     height: 30px;
     line-height: 30px;
     width: fit-content;
-    padding: var(--paddingMedium);
+    padding: var(--paddingSmall);
     border-bottom: var(--borderPrimary);
 }
 td * {
     vertical-align: middle;
 }
-td:not(:last-child) {
+td:not(:last-child), th:not(:last-child) {
     border-right: var(--borderPrimary);
+}
+
+@media (min-width: 1024px) {
+    table {
+        margin: var(--marginMedium) 0;
+        width: 100%;
+    }
+    td, th {
+        height: 30px;
+        line-height: 30px;
+        width: fit-content;
+        padding: var(--paddingMedium);
+    }
 }
 
 .formPrimary {

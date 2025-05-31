@@ -7,5 +7,5 @@ const emargementSchema = mongoose.Schema({
     date: { type: Date }
 });
 
-const emargementModele = mongoose.model("centres", emargementSchema);
+const emargementModele = mongoose.model("emargements", emargementSchema);
 export default emargementModele;

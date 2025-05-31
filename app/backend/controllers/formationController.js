@@ -1,5 +1,5 @@
 import Exeption from "../classes/exeption.js";
-import formationModele from "../models/formationModele";
+import formationModele from "../models/formationModele.js";
 
 export const find = (req, res, next) => {
     try {
