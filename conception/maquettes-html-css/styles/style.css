@@ -516,29 +516,6 @@ td:not(:last-child), th:not(:last-child) {
     margin: 0 0 var(--marginMedium) 0;
     box-sizing: border-box;
 }
-.formFieldWButton > :nth-child(1) {
-    border-radius: var(--borderRadiusPrimary) 0 0 var(--borderRadiusPrimary);
-    width: 80%;
-    margin: 0;
-    vertical-align: middle;
-}
-.formFieldWButton > :nth-child(2) {
-    width: 20%;
-    height: 30px;
-    border-radius: 0 var(--borderRadiusPrimary) var(--borderRadiusPrimary) 0;
-    margin: 0;
-    padding: 0;
-    border: var(--borderSecondary);
-    font-size: var(--fontLarge);
-    background: var(--backgroundColorPrimary);
-    vertical-align: middle;
-}
-.formFieldWButton > :nth-child(2):hover {
-
-}
-.formFieldWButton > :nth-child(2):active {
-
-}
 .formFieldLabel {
     display: block;
     font-size: var(--fontMedium);
