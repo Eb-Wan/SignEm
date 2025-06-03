@@ -6,4 +6,4 @@ class Exeption {
     }
 }
 
-export default { Exeption };
+export default Exeption;

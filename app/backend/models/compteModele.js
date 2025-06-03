@@ -6,7 +6,7 @@ const compteShema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     tel: { type: String, required: true, unique: true },
     mdp: { type: String, required: true },
-    role: { type: String, enum: ["utilisateur", "apprenti", "formateur", "administrateur"], required: true, default: "utilisateur" },
+    role: { type: String, enum: ["Utilisateur", "Stagiaire", "Formateur", "Administrateur"], required: true, default: "utilisateur" },
     data: { 
         formation: { type: mongoose.Schema.ObjectId },
         preferences: { type: String }

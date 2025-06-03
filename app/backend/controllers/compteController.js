@@ -51,7 +51,7 @@ export const login = async (req, res, next) => {
         if (!captcha.data.success && isProd) throw new Exeption("120", "", true);
         if (!(email && mdp)) throw new Exeption("110", "", true);
 
-        const user = await compteModele.findOne(email);
+        const user = await compteModele.findOne({ email });
         const passMatch = user ? await bcrypt.compare(mdp, user.mdp):false;
         
         if (!passMatch) throw new Exeption("220", "", true);

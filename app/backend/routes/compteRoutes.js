@@ -3,7 +3,7 @@ const router = express.Router();
 
 import { authMiddleware, isAdmin } from "../middlewares/protectMiddleware.js";
 // import { validateRegister, validateRequest } from "../middlewares/validatorMiddleware";
-import { createFirstAccount, list, login, logout, getRole, userUpdate, adminRegister, adminUpdate, adminRemove } from "../controllers/userController.js";
+import { createFirstAccount, list, login, logout, getRole, userUpdate, adminRegister, adminUpdate, adminRemove } from "../controllers/compteController.js";
 
 router.post("/", createFirstAccount);
 

@@ -1,14 +1,15 @@
-// import { useState } from "react"
-const Menu = ({ isOpened }) => {
+const Menu = ({ isOpened, contents, options }) => {
   return (
     <>
       {isOpened ?
         (
-          <nav className="menu left active">
+          <nav className="menu alignLeft active">
             <ul className="windowMenu">
-              <li className="menuItem active"><a href="#">Aujourd'hui</a></li>
-              <li className="menuItem"><a href="#">Émargements</a></li>
-              <li className="menuItem"><a href="#">Se déconnecter</a></li>
+              { contents.map((contents) => { return (
+                <li className="menuItem" key={ contents.label.replace(" ", "-") }>
+                  <a href={contents.href}>{contents.label}</a>
+                </li>
+              )})}
             </ul>
           </nav>
         ) : ""
