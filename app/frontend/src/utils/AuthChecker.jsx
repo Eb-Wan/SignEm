@@ -8,10 +8,10 @@ const AuthChecker = ({ children, role, reverse }) => {
   const [component, setComponent] = useState("")
   useEffect(() => {
     if (authLoading) setComponent(<Spinner />)
-    else if (!isLoggedIn) setComponent(<Navigate to="/login" />)
-      else if (isLoggedIn && reverse) setComponent(<Navigate to="/" />)
-    else {
-      if (!role) setComponent(children)
+    else if (!isLoggedIn && reverse == false) setComponent(<Navigate to="/login" />)
+    else if (isLoggedIn) {
+      if (reverse == true) setComponent(<Navigate to="/login" />)
+      else if (!role) setComponent(children)
       else if (role === userRole) setComponent(children)
       else setComponent(<Navigate to="/unauthorized" />)
     }

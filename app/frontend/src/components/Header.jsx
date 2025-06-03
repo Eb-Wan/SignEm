@@ -4,7 +4,7 @@ import Menu from './Menu'
 const Header = ({ headerTitle }) => {
   const menuContents = [
     { label:"Paramètres", href: "#" },
-    { label:"Se déconnecter", href: "#" }
+    { label:"Se déconnecter", href: "/logout" }
   ];
   const menuOptions = {
     desktop: { autoOpen: true },

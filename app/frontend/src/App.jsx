@@ -7,8 +7,10 @@ import DashboardStagiaire from "./pages/DashboardStagiaire"
 import AuthProvider from "./utils/AuthProvider"
 import AuthChecker from "./utils/AuthChecker"
 import Login from "./pages/Login"
+import Logout from "./pages/Logout"
 import Unauthorized from "./pages/Unauthorized"
 import Redirect from "./pages/Redirect"
+import PageNotFound from "./pages/PageNotFound"
 
 function App() {
   const [isHeaderMenuOpen, openHeaderMenu] = useState(false);
@@ -20,11 +22,13 @@ function App() {
           <main className="window container">
               <Routes>
                 <Route path="/" element={ <Redirect/> } />
-                <Route path="/administateur" element={ <AuthChecker role="Administateur"><DashboardFormateur /></AuthChecker> } />
+                <Route path="/administrateur" element={ <AuthChecker role="Administrateur"><DashboardAdministrateur /></AuthChecker> } />
                 <Route path="/formateur" element={ <AuthChecker role="Formateur"><DashboardFormateur /></AuthChecker> } />
                 <Route path="/stagiaire" element={ <AuthChecker role="Stagiaire"><DashboardStagiaire /></AuthChecker> } />
-                <Route path="/login" element={ <AuthChecker reverse="true"><Login/></AuthChecker> } />
+                <Route path="/login" element={ <AuthChecker reverse="false"><Login/></AuthChecker> } />
+                <Route path="/logout" element={ <AuthChecker><Logout/></AuthChecker> } />
                 <Route path="/unauthorized" element={ <Unauthorized/> } />
+                <Route path="*" element={<PageNotFound />}></Route>
               </Routes>
           </main>
         </div>

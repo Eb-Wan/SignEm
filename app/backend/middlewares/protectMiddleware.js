@@ -5,7 +5,7 @@ import compteModele from "../models/compteModele.js";
 export const authMiddleware = async (req, res, next) => {
     try {
         const token = req.cookies.token;
-        if (!token) throw new Exeption("120", "", true);
+        if (!token) throw new Exeption("210", "", true);
     
         const { id } = jwt.decode(token)
         if (!id) throw new Exeption("250", "", true);
