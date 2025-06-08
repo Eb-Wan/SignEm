@@ -21,20 +21,25 @@ export const createFirstAccount = async (req, res, next) => {
 
         res.status(201).json({ success: true });
     } catch (error) {
-        if (error.code && error.code === 11000) error = new Exeption(230, "", true)
+        if (error.code && error.code === 11000) error = new Exeption(230, error, true)
         next(error);
     }
 };
 
-export const list = async (req, res, next) => {
+export const adminList = async (req, res, next) => {
     try {
-        const { nom, prenom, email, tel } = req.query;
-        let users;
-        if (req.user.role === "administateur") users = await compteModele.find({ nom, prenom, email, tel }, "nom prenom email tel");
-        else if (req.user.role === "formateur") users = await compteModele.find({ nom, prenom, email }, "nom prenom email");
-        else throw new Exeption("240", "", true);
-        if (!users) throw Exeption("410", "", true);
-        res.status(200).json({ success: true, users });
+        const { nom, prenom, email, tel, role } = req.query;
+        const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {tel}, {role}, {}] }, "nom prenom email tel role");
+        res.status(200).json({ success: true, comptes });
+    } catch (error) {
+        next(error);
+    }
+};
+export const formateurList = async (req, res, next) => {
+    try {
+        const { nom, prenom, email } = req.query;
+        const comptes = await compteModele.find({ nom, prenom, email }, "nom prenom email");
+        res.status(200).json({ success: true, comptes });
     } catch (error) {
         next(error);
     }
@@ -74,9 +79,9 @@ export const logout = async (req, res, next) => {
     }
 };
 
-export const getRole = async (req, res, next) => {
+export const auth = async (req, res, next) => {
     try {
-        res.status(200).json({ success: true, role: req.user.role });
+        res.status(200).json({ success: true, role: req.user.role, nom: req.user.nom, prenom: req.user.prenom });
     } catch (error) {
         next(error);
     }
@@ -91,52 +96,50 @@ export const userUpdate = async (req, res, next) => {
         await compteModele.findByIdAndUpdate(user.id, { email, tel });
         res.status(200).json({ success: true });
     } catch (error) {
-        if (error.code && error.code === 11000) error = new Exeption("230", "", true)
+        if (error.code && error.code === 11000) error = new Exeption("230", error, true)
             next(error);
     }
 };
 
 export const adminRegister = async (req, res, next) => {
     try {
-        const { nom, prenom, email, tel, mdp } = req.body;
+        const { nom, prenom, email, tel, mdp, mdpCheck, role } = req.body;
 
-        if (!captcha.data.success && isProd) throw new Exeption("120", true);
-        if (!(nom && prenom && email && tel && mdp)) throw new Exeption("110", "", true);
-        
+        if (!(nom && prenom && email && tel && mdp && mdpCheck)) throw new Exeption("110", "", true);
+        if (mdp !== mdpCheck) throw new Exeption("130", "", true);
         const salt = await bcrypt.genSalt(8);
         const hashedPass = await bcrypt.hash(mdp, salt);
-        await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass });
+        await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass, role });
 
         res.status(201).json({ success: true });
     } catch (error) {
-        if (error.code && error.code === 11000) error = new Exeption("230", "", true)
+        if (error.code && error.code === 11000) error = new Exeption("230", error, true)
         next(error);
     }
 };
 export const adminUpdate = async (req, res, next) => {
     try {
-        const { nom, prenom, email, tel } = req.body;
-        const { id } = req.param;
+        const { nom, prenom, email, tel, role } = req.body;
+        const { id } = req.params;
+        console.log(id)
 
-        if (!(nom && prenom && email && tel && mdp)) throw new Exeption("110", "", true);
-
-        const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel });
-        if (user) throw new Exeption("410", "", true);
+        if (!(nom && prenom && email && tel && role)) throw new Exeption("110", "", true);
+        const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel, role });
+        if (!user) throw new Exeption("410", "", true);
         res.status(200).json({ success: true });
     } catch (error) {
-        if (error.code && error.code === 11000) error = new Exeption("230", "", true);
+        if (error.code && error.code === 11000) error = new Exeption("230", error, true);
         next(error);
     }
 };
 
 export const adminRemove = async (req, res, next) => {
     try {
-        const { id } = req.param;
+        const { id } = req.params;
 
-        if (await compteModele.findById(id)) throw new Exeption("210" , "", true);
-        
-        const user = await compteModele.findByIdAndRemove(id);
-        if (user) throw new Exeption("410", "", true);
+        const user = await compteModele.findById(id);
+        if (!user) throw new Exeption("410" , "", true);
+        await compteModele.findByIdAndDelete(id);
         res.status(200).json({ success: true });
     } catch (error) {
         next(error);

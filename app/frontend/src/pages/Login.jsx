@@ -1,15 +1,24 @@
 import apiClient from "../AxiosConfig"
 import { useForm } from "react-hook-form"
-import { useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import Spinner from "../components/Spinner";
-import Captcha from "../components/Captcha";
+import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from "react-router-dom"
+import Spinner from "../components/Spinner"
+import Captcha from "../components/Captcha"
+import { useAppContext } from "../utils/AppContext"
 
 const Login = () => {
+  const { isLoggedIn, authLoading } = useAppContext();
   const recaptcha = useRef(null);
   const [info, setInfo] = useState("");
   const navigate = useNavigate();
   const [isWaiting, setWaiting] = useState(false);
+  const [isLoading, setLoading] = useState(true)
+
+  useEffect(() => {
+    if (authLoading) setLoading(true);
+    else if (isLoggedIn)  navigate("/");
+    else setLoading(false);
+  }, [isLoggedIn, authLoading]);
 
   const {
     register,
@@ -36,22 +45,28 @@ const Login = () => {
 
   return (
     <>
-      <form className="formPrimary pyl" onSubmit={ handleSubmit(onSubmit) }>
-        <span className="formTitle">Connexion</span>
-        <div className="formField">
-          <label htmlFor="emailInput" className="formFieldLabel">Adresse email : </label>
-          <input {...register("email", {required: "Ce champ est obligatoire"})} type="text" className="formFieldInput formFieldSection" id="emailInput" />
-          {errors.name && (<p className="errorMessage">{ errors.name.message }</p>)}
-        </div>
-        <div className="formField">
-          <label htmlFor="mdpInput" className="formFieldLabel">Mot de passe : </label>
-          <input {...register("mdp", {required: "Ce champ est obligatoire"})} type="password" className="formFieldInput formFieldSection" id="mdpInput" />
-          { errors.mdp && (<p className="errorMessage">{ errors.mdp.message }</p>) }
-        </div>
-        <Captcha recaptcha={ recaptcha } />
-        { info ? <p className="errorMessage">{ info }</p> : "" }
-        { isWaiting ? <Spinner className="" /> : <button type="submit" className="buttonPrimary centered">Se connecter</button> }
-      </form>
+      {
+        !isLoading ? (
+          <>
+            <form className="formPrimary pyl" onSubmit={ handleSubmit(onSubmit) }>
+              <span className="formTitle">Connexion</span>
+              <div className="formField">
+                <label htmlFor="emailInput" className="formFieldLabel">Adresse email : </label>
+                <input {...register("email", {required: "Ce champ est obligatoire"})} type="text" className="formFieldInput formFieldSection" id="emailInput" />
+                {errors.name && (<p className="errorMessage">{ errors.name.message }</p>)}
+              </div>
+              <div className="formField">
+                <label htmlFor="mdpInput" className="formFieldLabel">Mot de passe : </label>
+                <input {...register("mdp", {required: "Ce champ est obligatoire"})} type="password" className="formFieldInput formFieldSection" id="mdpInput" />
+                { errors.mdp && (<p className="errorMessage">{ errors.mdp.message }</p>) }
+              </div>
+              <Captcha recaptcha={ recaptcha } />
+              { info ? <p className="errorMessage">{ info }</p> : "" }
+              { isWaiting ? <Spinner className="" /> : <button type="submit" className="buttonPrimary centered">Se connecter</button> }
+            </form>
+          </>
+        ) : <Spinner/>
+      }
     </>
   )
 }

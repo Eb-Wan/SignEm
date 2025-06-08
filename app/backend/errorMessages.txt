@@ -1,24 +1,26 @@
-000: Ignore;
-010: Success;
-020: Something unexpected happened;
-030: Nothing happened
+000:200 Ignorer;
+010:200 Opération Réussi;
+020:500 Il y a eu une erreur;
+030:304 Il ne s'est rien passé;
 
-100: Invalid input;
-110: Missing fields;
-120: Invalid captcha;
+100:400 Formulaire invalide;
+110:400 Champs de formulaire requis;
+120:403 Test recaptcha échoué;
+130:400 Les mots de passe ne sont pas identiques;
 
-200: Athentification Error;
-210: Unidentified user;
-220: Wrong email or password;
-230: User already exists;
-240: No access rights;
-250: Athentification Error : Invalid token;
+200:500 Erreur d'authentification;
+210:401 Utilisateur non identifié;
+220:400 Mauvaise adresse e-mail ou mot de passe;
+230:400 Utilisateur dejà existant;
+240:403 Vous n'avez pas les droits d'accès;
+250:400 Jeton d'authentification invalide;
 
-300: ;
+300:300 ;
 
-400: Ressource not found;
-410: User not found;
-500: ;
-600: ;
-700: ;
-800: ;
+400:404 Ressource non trouvée;
+410:404 Utilisateur non trouvé;
+
+500:500 ;
+600:500 ;
+700:500 ;
+800:500 ;

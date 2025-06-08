@@ -20,13 +20,21 @@ body {
 
   --backgroundColorPrimary: #FFFFF0;
   --backgroundColorSecondary: #C05010;
-  --backgroundColorTertiary: #CCCCCC;
+  --backgroundColorTertiary: #DDDDDD;
 
   --redPrimary: #FF2000;
   --redSecondary: #501000;
   --redTertiary: #FFD0D0;
 
-  --modalColorPrimary: #40200040;
+  --greenPrimary: #20FF00;
+  --greenSecondary: #105000;
+  --greenTertiary: #D0FFD0;
+
+  --bluePrimary: #0020ff;
+  --blueSecondary: #001050;
+  --blueTertiary: #D0D0FF;
+
+  --modalColorPrimary: #F0D0A080;
 
   --shadowColorPrimary: #40200040;
 
@@ -42,6 +50,7 @@ body {
   --paddingMedium: 10px;
   --paddingSmall: 5px;
 
+  --fontLarger: 38px;
   --fontLarge: 24px;
   --fontMedium: 18px;
   --fontSmall: 14px;
@@ -78,8 +87,6 @@ input, select, button {
 }
 
 main {
-  display: flex;
-  align-items: start;
   margin: 0;
   padding: 0;
 }
@@ -126,6 +133,10 @@ header {
   font-family: sans-serif;
   outline: none;
 }
+.buttonPrimary.lnr {
+  font-size: var(--fontLarge);
+}
+
 .buttonPrimary:hover {
   color: var(--textColorSecondary);
   background-color: var(--backgroundColorSecondary);
@@ -173,16 +184,10 @@ header {
   cursor: pointer;
 }
 .buttonWindow {
-  position: absolute;
-  top: 0;
-  left: -1px;
-  transform: translate(0, -100%);
-  
-  line-height: 50px;
   height: 50px;
   min-width: 50px;
   
-  padding: 0 var(--paddingMedium);
+  padding: 0;
   
   border: var(--borderSecondary);
   color: var(--textColorPrimary);
@@ -284,6 +289,18 @@ header {
   border-radius: var(--borderRadiusPrimary);
   box-shadow: var(--shadowPrimary);
 }
+.windowTitle {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--backgroundColorPrimary);
+  font-size: var(--fontLarge);
+  line-height: 2px;
+  margin: 0;
+  padding: 0;
+}
+
 .windowButtons {
   position: absolute;
   left: -1px;
@@ -322,6 +339,10 @@ header {
   padding-bottom: 0;
   box-sizing: border-box;
 }
+.element {
+  padding: var(--paddingMedium);
+  box-sizing: border-box;
+}
 .row {
   display: flex !important;
   height: fit-content;
@@ -334,9 +355,9 @@ header {
 }
 
 
-.textSmall { font-size: var(--fontSmall); }
-.textMedium { font-size: var(--fontMedium); }
-.textLarge { font-size: var(--fontLarge); }
+.textSmall { font-size: var(--fontSmall) !important; }
+.textMedium { font-size: var(--fontMedium) !important; }
+.textLarge { font-size: var(--fontLarge) !important; }
 
 .textBold { font-weight: bold; }
 
@@ -344,8 +365,9 @@ header {
 .textLeft { text-align: left; }
 .textRight { text-align: right; }
 
-.textGreen { color: green; }
-.textRed { color: red; }
+.textRed { color: var(--redPrimary); }
+.textGreen { color: var(--greenPrimary); }
+.textBlue { color: var(--bluePrimary); }
 
 .centered {
   display: block;
@@ -406,6 +428,7 @@ header {
 
 .flexGrow { flex-grow: 1 !important; }
 
+.uppercase { text-transform: uppercase; }
 .capitalize { text-transform: capitalize; }
 .borderBox { box-sizing: border-box; }
 
@@ -481,7 +504,7 @@ header {
 }
 
 table {
-  margin: var(--marginMedium) 0;
+  margin-top: var(--marginMedium);
   width: 100%;
   
   border-top: var(--borderPrimary);
@@ -625,36 +648,46 @@ textarea.formFieldInput {
   color: var(--redSecondary);
   text-align: center;
 }
-
-/* 
-
+.successMessage {
+  display: block;
+  padding: var(--paddingMedium);
+  margin: var(--marginLarge) auto;
+  border: var(--borderPrimary);
+  border-radius: var(--borderRadiusPrimary);
+  border-color: var(--greenSecondary);
+  background-color: var(--greenTertiary);
+  color: var(--greenSecondary);
+  text-align: center;
+}
 .infoMessage {
   display: block;
-  padding: 10px;
-  margin: 20px auto 20px auto;
-  max-width: 640px;
-  border: var(--secondaryBlueColor) 1px solid;
-  border-radius: 8px;
-  background-color: var(--tertiaryBlueColor);
-  color: var(--primaryBlueTextColor);
+  padding: var(--paddingMedium);
+  margin: var(--marginLarge) auto;
+  border: var(--borderPrimary);
+  border-radius: var(--borderRadiusPrimary);
+  border-color: var(--blueSecondary);
+  background-color: var(--blueTertiary);
+  color: var(--blueSecondary);
   text-align: center;
-} */
+}
 
 @media (min-width:1024px) {
   .menuContents {
-      background: none;
+    background: none;
   }
   .formFieldSection {
-      display: inline-flex;
-      width: 60%;
+    display: inline-flex;
+    width: 60%;
   }
   .formFieldLabel {
-      display: inline-block;
-      min-width: 30%;
+    display: inline-block;
+    min-width: 30%;
+    text-align: right;
   }
 }
 
 .modal {
+  z-index: 2;
   position: fixed;
   top: 0;
   left: 0;
@@ -662,7 +695,59 @@ textarea.formFieldInput {
   height: 100vh;
   background-color: var(--modalColorPrimary);
 }
+.modalWindow {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  min-width: 320px;
+  min-height: 240px;
+  max-width: 90vw;
+  max-height: 90vh;
 
+  border: var(--borderPrimary);
+  background-color: var(--backgroundColorPrimary);
+  border-radius: var(--borderRadiusPrimary);
+  box-shadow: var(--shadowPrimary);
+  padding: var(--paddingLarge);
+  box-sizing: border-box;
+}
+.modalWindow > * {
+  height: 65vh;
+  overflow: auto;
+  height: fit-content;
+}
+
+.modalButtonsList {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--backgroundColorPrimary);
+  font-size: var(--fontLarge);
+  line-height: 2px;
+  height: 2px;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+}
+.modalButton {
+  filter: brightness(50%);
+  border: none;
+  background: none;
+}
+.modalButton.lnr {
+  font-weight: bold;
+  font-size: var(--fontLarger);
+  padding: 0 var(--paddingMedium);
+}
+.modalButton:hover {
+  filter: brightness(100%);
+}
 
 .spinner {
   animation: spin 4s linear infinite;
