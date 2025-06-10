@@ -34,11 +34,8 @@ const DashBoard = () => {
   useEffect(() => {
     refreshSessions();
     apiClient.get("/api/formation/", { withCredentials: true })
-    .then(response => {
-      const formationsOptions = response.data.formations.map(formation => ({ label: formation.nom, value: formation._id }))
-      setFormations(response.data.formations);
-      
-    }).catch ((error) => {
+    .then(response => setFormations(response.data.formations))
+    .catch ((error) => {
       const message = (error.response && error.response.data.message) ? error.response.data.message : error.message;
       setErrorMessage(message);
     });

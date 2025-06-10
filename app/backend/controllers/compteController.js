@@ -29,7 +29,7 @@ export const createFirstAccount = async (req, res, next) => {
 export const adminList = async (req, res, next) => {
     try {
         const { nom, prenom, email, tel, role } = req.query;
-        const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {tel}, {role}, {}] }, "nom prenom email tel role");
+        const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {tel}, {role}, {}] }, "nom prenom email tel role sessionId");
         res.status(200).json({ success: true, comptes });
     } catch (error) {
         next(error);
@@ -113,13 +113,13 @@ export const userUpdate = async (req, res, next) => {
 
 export const adminRegister = async (req, res, next) => {
     try {
-        const { nom, prenom, email, tel, mdp, mdpCheck, role } = req.body;
+        const { nom, prenom, email, tel, mdp, mdpCheck, role, sessionId } = req.body;
 
         if (!(nom && prenom && email && tel && mdp && mdpCheck)) throw new Exeption("110", "", true);
         if (mdp !== mdpCheck) throw new Exeption("130", "", true);
         const salt = await bcrypt.genSalt(8);
         const hashedPass = await bcrypt.hash(mdp, salt);
-        await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass, role });
+        await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass, role, sessionId });
 
         res.status(201).json({ success: true });
     } catch (error) {
@@ -129,11 +129,11 @@ export const adminRegister = async (req, res, next) => {
 };
 export const adminUpdate = async (req, res, next) => {
     try {
-        const { nom, prenom, email, tel, role } = req.body;
+        const { nom, prenom, email, tel, role, sessionId } = req.body;
         const { id } = req.params;
 
         if (!(nom && prenom && email && tel && role)) throw new Exeption("110", "", true);
-        const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel, role });
+        const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel, role, sessionId });
         if (!user) throw new Exeption("401", "", true);
         res.status(200).json({ success: true });
     } catch (error) {

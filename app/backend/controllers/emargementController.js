@@ -22,10 +22,10 @@ export const create = (req, res, next) => {
         const dateNow = new Date.now();
         const emargements = stagiaires.map(stagiaire => {
             return ({
-                sessionId: mongoose.Schema.ObjectId(req.user.data.session),
-                formateurId: mongoose.Schema.ObjectId(req.user._id),
+                sessionId: req.user.data.session,
+                formateurId: req.user._id,
                 formateurSignature: signature,
-                stagiaireId: mongoose.Schema.ObjectId(stagiaire),
+                stagiaireId: stagiaire,
                 date: dateNow
             });
         });

@@ -3,7 +3,7 @@ import Menu from './Menu'
 import { useAppContext } from '../utils/AppContext';
 
 const Header = () => {
-  const { isLoggegIn, role } = useAppContext();
+  const { role } = useAppContext();
   let menuContents = [
     { label:"Paramètres", href: "#" },
   ];
@@ -28,7 +28,7 @@ const Header = () => {
       { label:"Paramètres", href: "/settings" },
       { label:"Se déconnecter", href: "/logout" }
     ];
-    menu.forEach(e => menuContents.unshift(e));
+    menuContents=[...menu]
   }
 
   const [isMenuOpen, setMenuOpen] = useState(false);

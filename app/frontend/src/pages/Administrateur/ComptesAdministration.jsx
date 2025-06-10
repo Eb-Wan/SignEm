@@ -5,6 +5,7 @@ import apiClient from "../../AxiosConfig";
 import Table from "../../components/Table";
 
 const DashBoard = () => {
+  const [sessions, setSessions] = useState([]);
   const [infoMessage, setInfoMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [addUser, openAddUser] = useState(false);
@@ -25,11 +26,14 @@ const DashBoard = () => {
       { label:"Stagiaire", value:"Stagiaire" },
       { label:"Formateur", value:"Formateur" },
       { label:"Administrateur", value:"Administrateur" }
-    ] }
+    ]},
+    { label: "Session", name: "sessionId", type:"select", options: sessions.map(session => ({ label: session.nom, session: session._id })) }
   ];
+  addUserFormFields[7].options.unshift({ label: "Aucune", value: "none" });
+
 
   const dateOptions = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-  const compteTableHead = ["Nom", "Prénom", "E-Mail", "Téléphone", "Rôle", "Actions"];
+  const compteTableHead = ["Nom", "Prénom", "E-Mail", "Téléphone", "Rôle", "Session", "Actions"];
   const compteTableRows = [];
 
   const refreshUsers = () => {
@@ -40,7 +44,15 @@ const DashBoard = () => {
       setErrorMessage(message);
     });
   }
-  useEffect(() => refreshUsers(), []);
+  useEffect(() => {
+    refreshUsers();
+    apiClient.get("/api/session/", { withCredentials: true })
+    .then(response => setSessions(response.data.sessions))
+    .catch ((error) => {
+      const message = (error.response && error.response.data.message) ? error.response.data.message : error.message;
+      setErrorMessage(message);
+    });
+  }, []);
 
   const closeAddUser = (success) => {
     openAddUser(false);
@@ -75,12 +87,14 @@ const DashBoard = () => {
       { errorMessage ? <p className="errorMessage">{ errorMessage }</p> : "" }
       
       { comptes.map((compte) => {
-        compteTableRows.push([
+          const session = sessions.filter(e => e._id == compte.sessionId)[0];
+          compteTableRows.push([
           (<span className="uppercase">{ compte.nom }</span>),
           (<span>{ compte.prenom }</span>),
           (<span>{ compte.email }</span>),
           (<span>{ compte.tel }</span>),
           (<span>{ compte.role }</span>),
+          (session ? session.nom : ""),
           (<><button title="Supprimer" aria-label="Supprimer cet utilisateur" onClick={ () => openDeleteUser(compte._id) } className="textLarge modalButton textRed lnr lnr-trash"></button>
           <button title="Modifier" aria-label="Modifier cet utilisateur" onClick={ () => openEditUser(compte._id) } className="textLarge modalButton textBlue lnr lnr-pencil"></button></>)
         ]);
@@ -94,8 +108,11 @@ const DashBoard = () => {
             { label:"Stagiaire", value:"Stagiaire" },
             { label:"Formateur", value:"Formateur" },
             { label:"Administrateur", value:"Administrateur" }
-          ] }
+          ] },
+          { label: "Session", name: "sessionId", type:"select", value: compte.sessionId, options: sessions.map(session => ({ label: session.nom, value: session._id })) }
         ]];
+        editUserFormFields[5].options.unshift({ label: "Aucune", value: "none" });
+
         return (<React.Fragment key={ compte._id }>
          { editUser==compte._id ?
           <FormWindow
