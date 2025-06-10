@@ -91,13 +91,13 @@ const DashBoard = () => {
           { editForm==formation._id ?
             <FormWindow
               action={ "/api/formation/admin/"+formation._id }
-              method="put" title="Modifier un utilisateur" width="800px"
+              method="put" title="Modifier une formation" width="800px"
               fields={ editFormFields } onClose={ closeEditForm }
             /> : "" }
           { deleteForm==formation._id ?
             <FormWindow
               action={ "/api/formation/admin/"+formation._id }
-              method="delete" title="Modifier un utilisateur" width="800px"
+              method="delete" title="Modifier un formation" width="800px"
               message={ <span class="errorMessage">Voulez-vous vraiment supprimer la formation { formation.nom } ?</span> }
               onClose={ closeDeleteForm }
             /> : "" }

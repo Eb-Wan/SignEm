@@ -5,6 +5,7 @@ export const find = async (req, res, next) => {
     try {
         const { nom, ouverte } = req.query;
         const formations = await formationModele.find({ $or:[{nom}, {ouverte}, {}] });
+        if (!formations) throw new Exeption("402", {}, true);
         res.status(200).json({ success: true, formations });
     } catch (error) {
         next(error);
@@ -36,7 +37,7 @@ export const remove = async (req, res, next) => {
     try {
         const { id } = req.params;
         const formation = await formationModele.findById(id);
-        if (!formation) throw new Exeption("400", {}, true);
+        if (!formation) throw new Exeption("402", {}, true);
         await formationModele.findByIdAndDelete(id);
         res.status(200).json({ success: true });
     } catch (error) {

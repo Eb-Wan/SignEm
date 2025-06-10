@@ -43,7 +43,7 @@ const FormWindow = ({ title, width, method, action, message, fields, redirection
             const isRequired = field.isRequired || false;
             const options = field.options || [{ label: "Aucun", value:"none" }];
             return (<>{
-              (type=="text" || type=="email" || type=="password") ?
+              (type=="text" || type=="email" || type=="password" || type=="date") ?
                 (<div key={ name+index } className="formField">
                   <label className="formFieldLabel">{ label }</label>
                   <input defaultValue={ value } className="formFieldSection formFieldInput"

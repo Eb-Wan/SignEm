@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const formationSchema = mongoose.Schema({
-    nom: { type: String, unique: true },
+    nom: { type: String, required: true, unique: true },
     ouverte: { type: Boolean }
 });
 

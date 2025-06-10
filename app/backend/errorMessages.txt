@@ -11,8 +11,9 @@
 200:500 Erreur d'authentification;
 210:401 Utilisateur non identifié;
 220:400 Mauvaise adresse e-mail ou mot de passe;
-230:400 Utilisateur dejà existant;
-231:400 Formation dejà existante;
+230:400 Utilisateur déjà existant;
+231:400 Formation déjà existante;
+232:400 Session déjà existante;
 240:403 Vous n'avez pas les droits d'accès;
 250:400 Jeton d'authentification invalide;
 
@@ -20,7 +21,9 @@
 300:300 ;
 
 400:404 Ressource non trouvée;
-410:404 Utilisateur non trouvé;
+401:404 Utilisateur non trouvé;
+402:404 Formation non trouvé;
+403:404 Session non trouvé;
 
 500:500 ;
 600:500 ;

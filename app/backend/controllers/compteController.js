@@ -101,7 +101,7 @@ export const userUpdate = async (req, res, next) => {
         const { email, tel } = req.body;
         const user = req.user;
         
-        if (!user) throw new Exeption("410", "", true);
+        if (!user) throw new Exeption("401", "", true);
         
         await compteModele.findByIdAndUpdate(user.id, { email, tel });
         res.status(200).json({ success: true });
@@ -134,7 +134,7 @@ export const adminUpdate = async (req, res, next) => {
 
         if (!(nom && prenom && email && tel && role)) throw new Exeption("110", "", true);
         const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel, role });
-        if (!user) throw new Exeption("410", "", true);
+        if (!user) throw new Exeption("401", "", true);
         res.status(200).json({ success: true });
     } catch (error) {
         if (error.code && error.code === 11000) error = new Exeption("230", error, true);
@@ -147,7 +147,7 @@ export const adminRemove = async (req, res, next) => {
         const { id } = req.params;
 
         const user = await compteModele.findById(id);
-        if (!user) throw new Exeption("410" , "", true);
+        if (!user) throw new Exeption("401" , "", true);
         await compteModele.findByIdAndDelete(id);
         res.status(200).json({ success: true });
     } catch (error) {
