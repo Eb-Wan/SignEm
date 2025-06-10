@@ -18,11 +18,17 @@ const Context = ({ children }) => {
     setLoading(true);
     apiClient.get("/api/compte/auth", { withCredentials: true })
     .then(response => {
-      setLoading(false);
-      setLoggedIn(true);
-      setRole(response.data.role);
-      setNom(response.data.nom);
-      setPrenom(response.data.prenom);
+      if (response.data.isLoggedIn) {
+        setLoading(false);
+        setLoggedIn(true);
+        setRole(response.data.role);
+        setNom(response.data.nom);
+        setPrenom(response.data.prenom);
+      } else {
+        setLoading(false);
+        setLoggedIn(false);
+        setRole("");    
+      }
     })
     .catch(error => {
       setLoading(false);

@@ -16,7 +16,7 @@ const Table = (props) => {
               <table key={ "table"+rowIndex }>
                 <tbody>
                   <tr><td>Ligne { rowIndex + 1 }</td><td>Donnée</td></tr>
-                  { head.map((cell, index) => <tr key={ "row"+index }><td>{ cell }</td><td>{ row[index] }</td></tr>) }
+                  { head.map((cell, index) => <tr key={ "row"+index }><td style={{ width:"20%" }}>{ cell }</td><td>{ row[index] }</td></tr>) }
                 </tbody>
               </table>
             );

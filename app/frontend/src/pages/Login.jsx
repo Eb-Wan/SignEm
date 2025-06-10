@@ -45,11 +45,11 @@ const Login = () => {
 
   return (
     <>
+      <title>SignEm - Connexion</title>
       {
         !isLoading ? (
           <>
-            <form className="formPrimary pyl" onSubmit={ handleSubmit(onSubmit) }>
-              <span className="formTitle">Connexion</span>
+            <form className="formPrimary pl" onSubmit={ handleSubmit(onSubmit) }>
               <div className="formField">
                 <label htmlFor="emailInput" className="formFieldLabel">Adresse email : </label>
                 <input {...register("email", {required: "Ce champ est obligatoire"})} type="text" className="formFieldInput formFieldSection" id="emailInput" />

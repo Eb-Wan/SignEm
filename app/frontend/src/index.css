@@ -26,8 +26,8 @@ body {
   --redSecondary: #501000;
   --redTertiary: #FFD0D0;
 
-  --greenPrimary: #20FF00;
-  --greenSecondary: #105000;
+  --greenPrimary: #208000;
+  --greenSecondary: #104000;
   --greenTertiary: #D0FFD0;
 
   --bluePrimary: #0020ff;
@@ -397,9 +397,9 @@ header {
 .mm { margin: var(--marginMedium) !important; }
 .ml { margin: var(--marginLarge) !important; }
 
-.mym { margin: var(--marginMedium) 0 !important; }
+.mym { margin: var(--marginMedium) auto !important; }
 .mxm { margin: 0, var(--marginMedium) !important; }
-.myl { margin: var(--marginLarge) 0 !important; }
+.myl { margin: var(--marginLarge) auto !important; }
 
 .pz { padding: 0 !important; }
 .ps { padding: var(--paddingSmall) !important; }
@@ -418,6 +418,7 @@ header {
 .w50 { width: 50% !important; }
 .w66 { width: 66% !important; }
 .w75 { width: 75% !important; }
+.w80 { width: 80% !important; }
 .w100 { width: 100% !important; }
 .wfc { width: fit-content !important; }
 
@@ -549,7 +550,8 @@ td:not(:last-child), th:not(:last-child) {
   display: block;
   margin: var(--marginLarge) auto;
   max-width: 640px;
-  width: 100vw;
+  width: 100%;
+  box-sizing: border-box;
   background-color: var(--backgroundColorPrimary);
   border: var(--borderPrimary);
   border-radius: var(--borderRadiusPrimary);
@@ -570,29 +572,6 @@ td:not(:last-child), th:not(:last-child) {
   width: 100%; 
   margin: 0 0 var(--marginMedium) 0;
   box-sizing: border-box;
-}
-.formFieldWButton > :nth-child(1) {
-  border-radius: var(--borderRadiusPrimary) 0 0 var(--borderRadiusPrimary);
-  width: 80%;
-  margin: 0;
-  vertical-align: middle;
-}
-.formFieldWButton > :nth-child(2) {
-  width: 20%;
-  height: 30px;
-  border-radius: 0 var(--borderRadiusPrimary) var(--borderRadiusPrimary) 0;
-  margin: 0;
-  padding: 0;
-  border: var(--borderSecondary);
-  font-size: var(--fontLarge);
-  background: var(--backgroundColorPrimary);
-  vertical-align: middle;
-}
-.formFieldWButton > :nth-child(2):hover {
-
-}
-.formFieldWButton > :nth-child(2):active {
-
 }
 .formFieldLabel {
   display: block;
@@ -716,7 +695,7 @@ textarea.formFieldInput {
 .modalWindow > * {
   height: 65vh;
   overflow: auto;
-  height: fit-content;
+  /* height: fit-content; */
 }
 
 .modalButtonsList {

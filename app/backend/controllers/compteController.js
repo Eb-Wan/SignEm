@@ -38,7 +38,7 @@ export const adminList = async (req, res, next) => {
 export const formateurList = async (req, res, next) => {
     try {
         const { nom, prenom, email } = req.query;
-        const comptes = await compteModele.find({ nom, prenom, email }, "nom prenom email");
+        const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {role:"Stagiaire"}] }, "nom prenom email");
         res.status(200).json({ success: true, comptes });
     } catch (error) {
         next(error);
@@ -81,7 +81,17 @@ export const logout = async (req, res, next) => {
 
 export const auth = async (req, res, next) => {
     try {
-        res.status(200).json({ success: true, role: req.user.role, nom: req.user.nom, prenom: req.user.prenom });
+        const token = req.cookies.token;
+        if (!token) return res.status(200).json({ sucess:true, isLoggedIn: false });
+    
+        const { id } = jwt.decode(token)
+        if (!id) throw new Exeption("250", "", true);
+    
+        const user = await compteModele.findById(id).select("-password");
+        if (!user) throw new Exeption("250", "", true);
+    
+        res.status(200).json({ success: true, isLoggedIn: true, role: user.role, nom: user.nom, prenom: user.prenom });
+        next();
     } catch (error) {
         next(error);
     }
@@ -121,7 +131,6 @@ export const adminUpdate = async (req, res, next) => {
     try {
         const { nom, prenom, email, tel, role } = req.body;
         const { id } = req.params;
-        console.log(id)
 
         if (!(nom && prenom && email && tel && role)) throw new Exeption("110", "", true);
         const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel, role });

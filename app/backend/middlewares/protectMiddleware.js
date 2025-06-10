@@ -31,7 +31,15 @@ export const isAdmin = async (req, res, next) => {
 };
 export const isFormateur = async (req, res, next) => {
     try {
-        if (req.user.role !== "Formateur") throw new Exeption(240, "", true);
+        if (req.user.role !== "Formateur" && req.user.role !== "Administrateur") throw new Exeption(240, "", true);
+        next();
+    } catch (error) {
+        next(error);
+    }
+};
+export const isStagiaire = async (req, res, next) => {
+    try {
+        if (req.user.role !== "Stagiaire" && req.user.role !== "Formateur" && req.user.role !== "Administrateur") throw new Exeption(240, "", true);
         next();
     } catch (error) {
         next(error);

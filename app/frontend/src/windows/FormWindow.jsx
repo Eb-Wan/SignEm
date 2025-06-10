@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiClient from '../AxiosConfig';
-import Spinner from "../components/Spinner";
+
 
 const FormWindow = ({ title, width, method, action, message, fields, redirection, onClose }) => {
   const [infoMessage, setInfoMessage] = useState("");
@@ -33,7 +33,7 @@ const FormWindow = ({ title, width, method, action, message, fields, redirection
           <span className="windowTitle">{ title }</span>
           <span className="modalButtonsList gm">
             <button type="button" onClick={ () => onClose() } title="Annuler" aria-label="Annuler" className="modalButton textRed lnr lnr-cross"></button>
-            <button type="submit" title="Valdier" aria-label="Valider" className="modalButton textGreen lnr lnr-chevron-down"></button>
+            <button type="submit" title="Valider" aria-label="Valider" className="modalButton textGreen lnr lnr-chevron-down"></button>
           </span>
           { fields ? fields.map((field, index) => {
             const label = field.label || "Libellé non défini";

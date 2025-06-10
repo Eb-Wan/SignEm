@@ -7,8 +7,8 @@ const compteShema = mongoose.Schema({
     tel: { type: String, required: true, unique: true },
     mdp: { type: String, required: true },
     role: { type: String, required: true, enum:["SansDroits", "Stagiaire", "Formateur", "Administrateur"], default: "SansDroits" },
-    data: { 
-        formation: { type: mongoose.Schema.ObjectId },
+    data: {
+        session: { type: mongoose.Schema.ObjectId },
         preferences: { type: String }
     },
 }, { timestamps: true });

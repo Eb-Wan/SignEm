@@ -14,7 +14,10 @@ const Header = () => {
 
   if (role === "Administrateur") {
     const menu = [
-      { label:"Comptes", href: "/administrateur" },
+      { label:"Accueil", href: "/administrateur" },
+      { label:"Comptes", href: "/administrateur/comptes" },
+      { label:"Formations", href: "/administrateur/formations" },
+      { label:"Sessions", href: "/administrateur/sessions" },
       { label:"Paramètres", href: "/settings" },
       { label:"Se déconnecter", href: "/logout" }
     ];

@@ -8,7 +8,7 @@ export const errorMiddleware = (err, req, res, next) => {
     if (errorCode.length > 3) errorCode = "020";
     if (errorCode.length < 3) errorCode.unshift("0");
     
-    const messagePosition = errorMessages.search(errorCode);
+    const messagePosition = errorMessages.search(errorCode+":");
 
     let statusCode = 500;
     let message = "Missing error message";

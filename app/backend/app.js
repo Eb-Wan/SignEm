@@ -17,10 +17,9 @@ import compteRoutes from "./routes/compteRoutes.js";
 import centreRoutes from "./routes/centreRoutes.js";
 import formationRoutes from "./routes/formationRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
-// import emargement from "./routes/emargementRoutes.js";
+import emargementRoutes from "./routes/emargementRoutes.js";
 
 connectDB();
-// cloudinaryConfig();
 
 // if (!fs.existsSync("./logs")) fs.mkdirSync("./logs");
 // const accessLogStream = fs.createWriteStream("./logs/access.log", { flags: 'a' })
@@ -35,7 +34,7 @@ app.use("/api/compte", compteRoutes);
 app.use("/api/centre", centreRoutes);
 app.use("/api/formation", formationRoutes);
 app.use("/api/session", sessionRoutes);
-// app.use("/api/emargement", emargementRoutes);
+app.use("/api/emargement", emargementRoutes);
 
 app.use(errorMiddleware);
 

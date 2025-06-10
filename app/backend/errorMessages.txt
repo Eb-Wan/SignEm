@@ -12,8 +12,10 @@
 210:401 Utilisateur non identifié;
 220:400 Mauvaise adresse e-mail ou mot de passe;
 230:400 Utilisateur dejà existant;
+231:400 Formation dejà existante;
 240:403 Vous n'avez pas les droits d'accès;
 250:400 Jeton d'authentification invalide;
+
 
 300:300 ;
 

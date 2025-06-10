@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useAppContext } from "../utils/AppContext";
-import FormWindow from "../windows/FormWindow";
-import apiClient from "../AxiosConfig";
-import Table from "../components/Table";
+import { useAppContext } from "../../utils/AppContext";
+import FormWindow from "../../windows/FormWindow";
+import apiClient from "../../AxiosConfig";
+import Table from "../../components/Table";
 
 const DashBoard = () => {
   const [infoMessage, setInfoMessage] = useState("");
@@ -29,7 +29,7 @@ const DashBoard = () => {
   ];
 
   const dateOptions = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
-  const compteTableHead = ["Nom", "Prénom", "E-Mail", "Téléphone", "Rôle", "Outils"];
+  const compteTableHead = ["Nom", "Prénom", "E-Mail", "Téléphone", "Rôle", "Actions"];
   const compteTableRows = [];
 
   const refreshUsers = () => {
