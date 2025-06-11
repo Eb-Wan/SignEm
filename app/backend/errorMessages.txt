@@ -5,6 +5,9 @@
 
 100:400 Formulaire invalide;
 110:400 Champs de formulaire requis;
+111:400 Veuillez signer dans le carré "signature";
+112:400 Veuillez cocher au moins un stagiaire;
+113:400 Cette fiche a déjà été signée par vous;
 120:403 Test recaptcha échoué;
 130:400 Les mots de passe ne sont pas identiques;
 
@@ -24,8 +27,11 @@
 401:404 Utilisateur non trouvé;
 402:404 Formation non trouvé;
 403:404 Session non trouvé;
+404:404 Émargement non trouvé;
 
 500:500 ;
+540:400 Aucun emargement;
+550:500 Érreur lors de l'envoi des e-mails de validation;
 600:500 ;
 700:500 ;
 800:500 ;

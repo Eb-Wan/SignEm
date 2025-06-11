@@ -5,7 +5,7 @@ const emargementSchema = mongoose.Schema({
     formateurId: { type: mongoose.Schema.ObjectId, required: true },
     formateurSignature: { type: String, required: true },
     stagiaireId: { type: mongoose.Schema.ObjectId, required: true },
-    stagiaireSignature: { type: String },
+    stagiaireSignature: { type: String, default:"" },
     date: { type: Date, required: true }
 });
 

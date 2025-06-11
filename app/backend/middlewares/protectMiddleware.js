@@ -7,10 +7,10 @@ export const authMiddleware = async (req, res, next) => {
         const token = req.cookies.token;
         if (!token) throw new Exeption("210", "", true);
     
-        const { id } = jwt.decode(token)
+        const { id } = jwt.decode(token);
         if (!id) throw new Exeption("250", "", true);
     
-        const user = await compteModele.findById(id).select("-password -email");
+        const user = await compteModele.findById(id).select("-password");
         if (!user) throw new Exeption("250", "", true);
     
         req.user = user;

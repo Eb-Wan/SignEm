@@ -27,7 +27,7 @@ const DashBoard = () => {
       { label:"Formateur", value:"Formateur" },
       { label:"Administrateur", value:"Administrateur" }
     ]},
-    { label: "Session", name: "sessionId", type:"select", options: sessions.map(session => ({ label: session.nom, session: session._id })) }
+    { label: "Session", name: "sessionId", type:"select", options: sessions.map(session => ({ label: session.nom, value: session._id })) }
   ];
   addUserFormFields[7].options.unshift({ label: "Aucune", value: "none" });
 

@@ -11,6 +11,7 @@ const Context = ({ children }) => {
   const [authLoading, setLoading] = useState(true);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [role, setRole] = useState("");
+  const [sessionId, setSession] = useState("");
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
 
@@ -24,6 +25,7 @@ const Context = ({ children }) => {
         setRole(response.data.role);
         setNom(response.data.nom);
         setPrenom(response.data.prenom);
+        setSession(response.data.session);
       } else {
         setLoading(false);
         setLoggedIn(false);
@@ -38,7 +40,7 @@ const Context = ({ children }) => {
   }, [location]);
   return (
     <>
-      <AppContext.Provider value={{ authLoading, isLoggedIn, role, nom, prenom }}>
+      <AppContext.Provider value={{ authLoading, isLoggedIn, role, nom, prenom, sessionId }}>
         {children}
       </AppContext.Provider>
     </>

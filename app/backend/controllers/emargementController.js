@@ -1,48 +1,90 @@
-// const stagiaires = formData.getAll("stagiaire");
-        //ok if (signature > 228)
-
-import mongoose from "mongoose";
 import Exeption from "../classes/exeption.js";
-import centreModele from "../models/emargementModele.js";
+import compteModele from "../models/compteModele.js";
+import emargementModele from "../models/emargementModele.js";
+import { sendMultipleEmails } from "../services/sendgrid.js";
+import jwt from "jsonwebtoken";
 
-export const get = (req, res, next) => {
+export const get = async (req, res, next) => {
     try {
-        
+        const { temps, sessionId } = req.params;
+        const start = new Date();
+        const end = new Date();
+
+        if (temps == "matin") {
+            start.setHours(0, 0, 0, 0);
+            end.setHours(11, 59, 59, 999);
+        } else if (temps == "aprem") {
+            end.setHours(23, 59, 59, 999);
+            start.setHours(12, 0, 0, 0);
+        }
+        else throw new Exeption("020", "", true);
+
+        const emargements = await emargementModele.find({
+            date: { $gte: start, $lte: end },
+            sessionId
+        });
+        res.status(200).json({ success: true, emargements });
     } catch (error) {
         next(error);
     }
 }
-export const create = (req, res, next) => {
+export const create = async (req, res, next) => {
     try {
         const { signature, stagiaires } = req.body;
-
-        //Changer propriété data.formation par data.session et tester si elle retourne un objectid
-        console.log(req.user.data.session);
-
-        const dateNow = new Date.now();
+        if (signature.length <= 300) throw new Exeption("111", "", true);
+        if (stagiaires.length <= 0) throw new Exeption("112", "", true);
+        const dateNow = new Date();
         const emargements = stagiaires.map(stagiaire => {
             return ({
-                sessionId: req.user.data.session,
                 formateurId: req.user._id,
                 formateurSignature: signature,
                 stagiaireId: stagiaire,
-                date: dateNow
+                date: dateNow,
+                sessionId: req.user.sessionId
             });
         });
 
         //Gère les erreurs
-        centreModele.insert({ emargements });
+        const emargementResults = await emargementModele.insertMany(emargements);
+        const emargementsIds = emargementResults.map(e => e._id);
 
-        //Crée le lien et renvoi une réponse
+        const stagiairesResults = await compteModele.find({ _id: { $in: stagiaires} });
+        const stagiairesEmails = stagiairesResults.map(e => e.email);
+
+        const token = jwt.sign({ emargementsIds: emargementsIds }, process.env.JWT_SECRET, { expiresIn: "30m" });
+        const link = process.env.CORS_ORIGIN+"/stagiaire/signer?token="+token;
+
+        const mailHtml = `
+            <h1>Signature SignEm</h1>
+            <p>Cliquez sur le lien suivant afin de signer votre fiche d'émargement: <a href="${link}">Signer !</a></p>
+            <p>Merci et bonne journée !</p>
+        `;
+        const result = await sendMultipleEmails(stagiairesEmails, "Lien de signature d'émargement SignEm", mailHtml);
+        if (result !== true) throw new Exeption("550", result.message, true);
+
+        res.status(200).json({ success: true });
     } catch (error) {
         next(error);
     }
 }
-export const sign = (req, res, next) => {
+export const sign = async (req, res, next) => {
     try {
-        // Récupère le contenu du token
-        // Compare le stagiaire de l'émargement et celui de la requête
-        // Si ok prends la signature et ajoute la
+        const { signature } = req.body;
+        const { token } = req.params;
+        if (signature.length <= 300) throw new Exeption("111", "", true);
+        if (!token) throw new Exeption("540", "", true);
+
+        const { emargementsIds } = jwt.decode(token);
+        if (!emargementsIds) throw new Exeption("540", "", true);
+
+        const emargementResults = await emargementModele.find({ _id: { $in: emargementsIds}, stagiaireId: req.user._id });
+        if (!emargementResults) throw new Exeption("404", "", true);
+        if (emargementResults[0].stagiaireSignature) throw new Exeption("113", "", true);
+
+        const emargementId = emargementResults[0]._id;
+        await emargementModele.findByIdAndUpdate(emargementId, { stagiaireSignature: signature });
+
+        res.status(200).json({ success: true });
     } catch (error) {
         next(error);
     }

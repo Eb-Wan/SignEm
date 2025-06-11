@@ -29,6 +29,13 @@ const Header = () => {
       { label:"Se déconnecter", href: "/logout" }
     ];
     menuContents=[...menu]
+  } else if (role === "Stagiaire") {
+    const menu = [
+      { label:"Émargements", href: "/stagiaire" },
+      { label:"Paramètres", href: "/settings" },
+      { label:"Se déconnecter", href: "/logout" }
+    ];
+    menuContents=[...menu]
   }
 
   const [isMenuOpen, setMenuOpen] = useState(false);

@@ -7,8 +7,8 @@ import { get, create, sign } from "../controllers/emargementController.js";
 
 //implémente validation
 
-router.post("/:id", authMiddleware, isStagiaire, sign);
-router.get("/", authMiddleware, isFormateur, get);
+router.post("/:token", authMiddleware, isStagiaire, sign);
+router.get("/:temps/:sessionId", authMiddleware, isFormateur, get);
 router.post("/", authMiddleware, isFormateur, create);
 
 export default router;

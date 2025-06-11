@@ -17,7 +17,7 @@ export const createFirstAccount = async (req, res, next) => {
         
         const salt = await bcrypt.genSalt(8);
         const hashedPass = await bcrypt.hash(mdp, salt);
-        const user = await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass });
+        await compteModele.create({ nom, prenom, email, tel, mdp: hashedPass });
 
         res.status(201).json({ success: true });
     } catch (error) {
@@ -28,8 +28,10 @@ export const createFirstAccount = async (req, res, next) => {
 
 export const adminList = async (req, res, next) => {
     try {
-        const { nom, prenom, email, tel, role } = req.query;
-        const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {tel}, {role}, {}] }, "nom prenom email tel role sessionId");
+        const { nom, prenom, email, tel, role, sessionId } = req.query;
+        const comptes = (nom || prenom || email || tel || role || sessionId) ? 
+            await compteModele.find({ $or: [{nom}, {prenom}, {email}, {tel}, {role}, {sessionId}] }, "nom prenom email tel role sessionId"):
+            await compteModele.find({}, "nom prenom email tel role sessionId");
         res.status(200).json({ success: true, comptes });
     } catch (error) {
         next(error);
@@ -37,8 +39,8 @@ export const adminList = async (req, res, next) => {
 };
 export const formateurList = async (req, res, next) => {
     try {
-        const { nom, prenom, email } = req.query;
-        const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {role:"Stagiaire"}] }, "nom prenom email");
+        const { nom, prenom, email, sessionId } = req.query;
+        const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {sessionId}], role: {$not:{ $eq:"Formateur" }} }, "nom prenom email");
         res.status(200).json({ success: true, comptes });
     } catch (error) {
         next(error);
@@ -90,7 +92,7 @@ export const auth = async (req, res, next) => {
         const user = await compteModele.findById(id).select("-password");
         if (!user) throw new Exeption("250", "", true);
     
-        res.status(200).json({ success: true, isLoggedIn: true, role: user.role, nom: user.nom, prenom: user.prenom });
+        res.status(200).json({ success: true, isLoggedIn: true, role: user.role, nom: user.nom, prenom: user.prenom, session: user.sessionId });
         next();
     } catch (error) {
         next(error);
