@@ -17,7 +17,7 @@ const DashBoard = () => {
 
   const refreshPage = async () => {
     try {
-      const comptes = await apiClient.get("/api/compte/formateur/list/?sessionId="+sessionId, { withCredentials: true })
+      const comptes = await apiClient.get("/api/compte/formateur/list/", { withCredentials: true })
       const matin = await apiClient.get("/api/emargement/matin/"+sessionId, { withCredentials: true })
       const aprem = await apiClient.get("/api/emargement/aprem/"+sessionId, { withCredentials: true })
       setStagiaires(comptes.data.comptes);
@@ -53,7 +53,7 @@ const DashBoard = () => {
       { stagiaires.length>0 ? <>
          { stagiaires.map((compte) => {
 
-          const matin = emargementsMatin.find(e => e.stagiaireId == compte._id);
+          const matin = emargementsMatin.find(e => e.stagiaireId == compte._id) || "<span></span>";
           const aprem = emargementsAprem.find(e => e.stagiaireId == compte._id) || "<span></span>";
 
           compteTableRows.push([

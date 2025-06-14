@@ -5,14 +5,14 @@ import { authMiddleware, isAdmin, isFormateur } from "../middlewares/protectMidd
 // import { validateRegister, validateRequest } from "../middlewares/validatorMiddleware";
 import { createFirstAccount, login, logout, auth, userUpdate, adminRegister, adminUpdate, adminRemove, adminList, formateurList } from "../controllers/compteController.js";
 
-router.post("/", createFirstAccount);
+// router.post("/", createFirstAccount);
 
 router.get("/auth", auth);
 
 router.post("/login", login);
 router.get("/logout", logout);
 
-router.put("/", authMiddleware, userUpdate);
+// router.put("/", authMiddleware, userUpdate);
 
 router.get("/formateur/list", authMiddleware, isFormateur, formateurList);
 

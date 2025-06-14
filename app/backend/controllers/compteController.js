@@ -39,7 +39,8 @@ export const adminList = async (req, res, next) => {
 };
 export const formateurList = async (req, res, next) => {
     try {
-        const { nom, prenom, email, sessionId } = req.query;
+        const { nom, prenom, email } = req.query;
+        const { sessionId } = req.user;
         const comptes = await compteModele.find({ $or: [{nom}, {prenom}, {email}, {sessionId}], role: {$not:{ $eq:"Formateur" }} }, "nom prenom email");
         res.status(200).json({ success: true, comptes });
     } catch (error) {
@@ -134,7 +135,7 @@ export const adminUpdate = async (req, res, next) => {
         const { nom, prenom, email, tel, role, sessionId } = req.body;
         const { id } = req.params;
 
-        if (!(nom && prenom && email && tel && role)) throw new Exeption("110", "", true);
+        if (!(nom && prenom && email && tel && role && sessionId)) throw new Exeption("110", "", true);
         const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel, role, sessionId });
         if (!user) throw new Exeption("401", "", true);
         res.status(200).json({ success: true });

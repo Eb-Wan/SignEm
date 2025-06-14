@@ -741,3 +741,9 @@ textarea.formFieldInput {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.signature {
+  height: 300px;
+  width: 300px;
+  scale: 40%;
+  margin: -100px;
+}

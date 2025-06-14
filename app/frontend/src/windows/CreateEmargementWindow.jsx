@@ -14,8 +14,10 @@ const SignWindow = ({ width, stagiaires, onClose }) => {
         const formData = new FormData(event.target);
     
         const stagiaires = formData.getAll("stagiaire");
-        const signature = document.getElementById("signature").outerHTML;
-        await apiClient.post("/api/emargement/", {stagiaires, signature}, { withCredentials: true });
+        const signature = document.createElement("svg");
+        signature.className="signature";
+        signature.innerHTML = document.getElementById("signature").innerHTML;
+        await apiClient.post("/api/emargement/", {stagiaires, signature: signature.outerHTML}, { withCredentials: true });
         onClose(true);
     } catch (error) {
       const errorMessage = (error.response) ? error.response.data.message : error.message;
@@ -45,7 +47,7 @@ const SignWindow = ({ width, stagiaires, onClose }) => {
                   return (
                     <div className="formField">
                       <input id={ stagiaire._id } type="checkbox" name="stagiaire" className="" value={ stagiaire._id }></input>
-                      <label for={ stagiaire._id }><span className="uppercase">{ stagiaire.nom }</span>&nbsp;<span>{ stagiaire.prenom }</span></label>
+                      <label htmlFor={ stagiaire._id }><span className="uppercase">{ stagiaire.nom }</span>&nbsp;<span>{ stagiaire.prenom }</span></label>
                     </div>
                   )
                 }) }
