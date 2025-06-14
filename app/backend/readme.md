@@ -3,8 +3,7 @@
 ## Routes API Compte
 
 ### GET  `/api/compte/auth`
-
-Renvoie les informations du compte authentifié
+Renvoie les informations du compte authentifié.
 
 ```json
 {
@@ -18,25 +17,22 @@ Renvoie les informations du compte authentifié
 ```
 
 ### POST `/api/compte/login`
-
 Renvoie un jeton d'authentification par les cookies.
 
 Cors de requête :
 
 ```json
 {
-	captchaToken : "",
-	email: "",
-	mdp: ""
+	"captchaToken": "<token>",
+	"email": "<adresse email>",
+	"mdp": "<mot de passe>"
 }
 ```
 
 ### GET `/api/compte/logout`
-
 Détruit le jeton d'identification en renvoyant un cookie obsolète.
 
 ### GET `/api/compte/formateur/list`
-
 Revoie la liste des stagiaires relié à la même session que celle du compte formateur.
 
 ```json
@@ -50,8 +46,7 @@ Revoie la liste des stagiaires relié à la même session que celle du compte fo
 ```
 
 ### GET `/api/compte/admin/list`
-
-Renvoie la liste des comptes utilisateurs si authentifié avec compte admin
+Renvoie la liste des comptes utilisateurs si authentifié avec compte admin.
 
 ```json
 {
@@ -66,9 +61,8 @@ Renvoie la liste des comptes utilisateurs si authentifié avec compte admin
 ```
 
 ### POST `/api/compte/admin/`
-
-Créé un compte utilisateur si authentifié avec compte admin.
-Propriétée role ne peut être que SansDroits, Stagiaire, Formateur, Administrateur.
+Créé un compte utilisateur si authentifié avec un compte admin.
+Propriétée role ne peut être que SansDroits, Stagiaire, Formateur ou Administrateur.
 
 Cors de requête :
 
@@ -86,9 +80,8 @@ Cors de requête :
 ```
 
 ### PUT `/api/compte/admin/<id de compte>`
-
-Modifie un compte utilisateur si authentifié avec compte admin.
-Propriétée role ne peut être que SansDroits, Stagiaire, Formateur, Administrateur.
+Modifie un compte utilisateur si authentifié avec un compte admin.
+Propriétée role ne peut être que SansDroits, Stagiaire, Formateur ou Administrateur.
 
 Cors de requête :
 
@@ -104,15 +97,13 @@ Cors de requête :
 ```
 
 ### DELETE `/api/compte/admin/<id de compte>`
-
-Supprime un compte utilisateur si authentifié avec compte admin.
+Supprime un compte utilisateur si authentifié avec un compte admin.
 
 ## Routes API emargement
 
 ### GET `/api/emargement/<emargement id>?temps=<"matin" ou "aprem" ou rien>&dateDebut=<yyyy-mm-dd>&?dateFin=<yyyy-mm-dd>`
-
 Renvoie la liste des émargement si authentifié.
-(Pas encore d'actualitée)
+(Pas encore d'actualité)
 
 ### GET `/api/emargement/<"matin" ou "aprem">/<emargement id>`
 Renvoie la liste des émargement si authentifié.
@@ -120,7 +111,6 @@ Renvoie la liste des émargement si authentifié.
 
 
 ### POST `/api/emargement`
-
 Créé un émargement si authentifié avec un compte formateur ou admin.
 
 Cors de requête :
@@ -133,7 +123,6 @@ Cors de requête :
 ```
 
 ### POST `/api/emargement/<token>`
-
 Permet la signature d'un émargement si authentifié avec un compte relié avec un émargement présent de le JWT de la requête.
 
 ```json
@@ -145,10 +134,10 @@ Permet la signature d'un émargement si authentifié avec un compte relié avec 
 ## Routes API formation
 
 ### GET `/api/formation?nom=<nom>&ouverte=<booléen>`
-Renvoie la liste des formations si authentifié
+Renvoie la liste des formations si authentifié.
 
 ### POST `/api/formation/admin`
-Créé une formation si authentifié avec un compte admin
+Créé une formation si authentifié avec un compte admin.
 
 ```json
 {
@@ -158,7 +147,7 @@ Créé une formation si authentifié avec un compte admin
 ```
 
 ### PUT `/api/formation/admin/<id de formation>`
-Modifie une formation si authentifié avec un compte admin
+Modifie une formation si authentifié avec un compte admin.
 
 ```json
 {
@@ -168,15 +157,15 @@ Modifie une formation si authentifié avec un compte admin
 ```
 
 ### DELETE `/api/formation/admin/<id de formation>`
-Supprime une formation si authentifié avec un compte admin
+Supprime une formation si authentifié avec un compte admin.
 
 ## Routes API session
 
 ### GET `/api/session?nom=<nom>&formationId=<id>&dateDebut=<date>&dateFin<date>`
-Renvoie la liste des sessions si authentifié
+Renvoie la liste des sessions si authentifié.
 
 ### POST `/api/session/admin`
-Créé une session si authentifié avec un compte admin
+Créé une session si authentifié avec un compte admin.
 
 ```json
 {
@@ -189,7 +178,7 @@ Créé une session si authentifié avec un compte admin
 ```
 
 ### PUT `/api/session/admin/<id de session>`
-Modifie une session si authentifié avec un compte admin
+Modifie une session si authentifié avec un compte admin.
 
 ```json
 {
@@ -202,4 +191,4 @@ Modifie une session si authentifié avec un compte admin
 ```
 
 ### DELETE `/api/session/admin/<id de session>`
-Supprime une session si authentifié avec un compte admin
+Supprime une session si authentifié avec un compte admin.
