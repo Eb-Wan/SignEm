@@ -11,7 +11,7 @@ Renvoie les informations du compte authentifié
     "success":true,
     "isLoggedIn":true,
     "role":"Administrateur",
-    "nom":'"Doe",
+    "nom":"Doe",
     "prenom":"John",
     "session":"none"
 }
