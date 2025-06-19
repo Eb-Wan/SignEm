@@ -8,8 +8,8 @@ import { find, create, update, remove } from "../controllers/sessionController.j
 
 //implémente validation
 router.get("/", authMiddleware, find);
-router.post("/admin", authMiddleware, isAdmin, sessionValidator, validateRequest, create);
-router.put("/admin/:id", authMiddleware, isAdmin, sessionValidator, validateRequest, update);
-router.delete("/admin/:id", authMiddleware, isAdmin, remove);
+router.post("/admin", limiter, authMiddleware, isAdmin, sessionValidator, validateRequest, create);
+router.put("/admin/:id", limiter, authMiddleware, isAdmin, sessionValidator, validateRequest, update);
+router.delete("/admin/:id", limiter, authMiddleware, isAdmin, remove);
 
 export default router;

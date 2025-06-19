@@ -8,6 +8,6 @@ import { get, create, sign } from "../controllers/emargementController.js";
 
 router.post("/:token", authMiddleware, isStagiaire, emargementSignValidator, validateRequest, sign);
 router.get("/:temps/:sessionId", authMiddleware, isFormateur, get);
-router.post("/", authMiddleware, isFormateur, emargementCreateValidator, validateRequest, create);
+router.post("/", limiter, authMiddleware, isFormateur, emargementCreateValidator, validateRequest, create);
 
 export default router;

@@ -8,8 +8,8 @@ import { find, create, update, remove } from "../controllers/formationController
 
 //implémente validation
 router.get("/", authMiddleware, find);
-router.post("/admin", authMiddleware, isAdmin, formationValidator, validateRequest, create);
-router.put("/admin/:id", authMiddleware, isAdmin, formationValidator, validateRequest, update);
-router.delete("/admin/:id", authMiddleware, isAdmin, remove);
+router.post("/admin", limiter, authMiddleware, isAdmin, formationValidator, validateRequest, create);
+router.put("/admin/:id", limiter, authMiddleware, isAdmin, formationValidator, validateRequest, update);
+router.delete("/admin/:id", limiter, authMiddleware, isAdmin, remove);
 
 export default router;

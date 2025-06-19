@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 
+import limiter from "../middlewares/limiter.js";
 import { authMiddleware, isAdmin, isFormateur } from "../middlewares/protectMiddleware.js";
 import { validateRequest } from "../middlewares/validatorMiddleware.js";
 import { compteRegisterValidator, compteUpdateValidator } from "../validators/compteValidation.js";
@@ -18,8 +19,8 @@ router.get("/logout", logout);
 router.get("/formateur/list", authMiddleware, isFormateur, formateurList);
 
 router.get("/admin/list", authMiddleware, isAdmin, adminList);
-router.post("/admin/", authMiddleware, isAdmin, compteRegisterValidator, validateRequest, adminRegister);
-router.put("/admin/:id", authMiddleware, isAdmin, compteUpdateValidator, validateRequest, adminUpdate);
-router.delete("/admin/:id", authMiddleware, isAdmin, adminRemove);
+router.post("/admin/", limiter, authMiddleware, isAdmin, compteRegisterValidator, validateRequest, adminRegister);
+router.put("/admin/:id", limiter, authMiddleware, isAdmin, compteUpdateValidator, validateRequest, adminUpdate);
+router.delete("/admin/:id", limiter, authMiddleware, isAdmin, adminRemove);
 
 export default router;
