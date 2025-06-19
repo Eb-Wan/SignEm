@@ -5,6 +5,7 @@ import { authMiddleware, isAdmin } from "../middlewares/protectMiddleware.js";
 import { validateRequest } from "../middlewares/validatorMiddleware.js";
 import { formationValidator } from "../validators/formationValidation.js";
 import { find, create, update, remove } from "../controllers/formationController.js";
+import limiter from "../middlewares/limiter.js";
 
 //implémente validation
 router.get("/", authMiddleware, find);

@@ -5,7 +5,9 @@ import { useAppContext } from '../utils/AppContext';
 const Header = () => {
   const { role } = useAppContext();
   let menuContents = [
-    { label:"Paramètres", href: "#" },
+    { label:"Politique de confidentialitée", href: "/confidentialitee" },
+    { label:"Paramètres", href: "/parametres" },
+    { label:"Se connecter", href: "/se-connecter" }
   ];
   const menuOptions = {
     desktop: { autoOpen: true },
@@ -18,22 +20,25 @@ const Header = () => {
       { label:"Comptes", href: "/administrateur/comptes" },
       { label:"Formations", href: "/administrateur/formations" },
       { label:"Sessions", href: "/administrateur/sessions" },
-      { label:"Paramètres", href: "/settings" },
-      { label:"Se déconnecter", href: "/logout" }
+      { label:"Politique de confidentialitée", href: "/confidentialitee" },
+      { label:"Paramètres", href: "/parametres" },
+      { label:"Se déconnecter", href: "/se-deconnecter" }
     ];
     menuContents=[...menu]
   } else if (role === "Formateur") {
     const menu = [
       { label:"Émargements", href: "/formateur" },
-      { label:"Paramètres", href: "/settings" },
-      { label:"Se déconnecter", href: "/logout" }
+      { label:"Politique de confidentialitée", href: "/confidentialitee" },
+      { label:"Paramètres", href: "/parametres" },
+      { label:"Se déconnecter", href: "/se-deconnecter" }
     ];
     menuContents=[...menu]
   } else if (role === "Stagiaire") {
     const menu = [
       { label:"Émargements", href: "/stagiaire" },
-      { label:"Paramètres", href: "/settings" },
-      { label:"Se déconnecter", href: "/logout" }
+      { label:"Politique de confidentialitée", href: "/confidentialitee" },
+      { label:"Paramètres", href: "/parametres" },
+      { label:"Se déconnecter", href: "/se-deconnecter" }
     ];
     menuContents=[...menu]
   }

@@ -1,11 +1,11 @@
 import express from "express";
 const router = express.Router();
 
-import limiter from "../middlewares/limiter.js";
 import { authMiddleware, isAdmin, isFormateur } from "../middlewares/protectMiddleware.js";
 import { validateRequest } from "../middlewares/validatorMiddleware.js";
 import { compteRegisterValidator, compteUpdateValidator } from "../validators/compteValidation.js";
 import { login, logout, auth, adminRegister, adminUpdate, adminRemove, adminList, formateurList } from "../controllers/compteController.js";
+import limiter from "../middlewares/limiter.js";
 
 // router.post("/", createFirstAccount);
 

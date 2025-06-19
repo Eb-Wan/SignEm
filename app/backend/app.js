@@ -14,7 +14,7 @@ import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import { connectDB } from "./config/db.js";
 // import cloudinaryConfig from "./config/cloudinary";
 import compteRoutes from "./routes/compteRoutes.js";
-import centreRoutes from "./routes/centreRoutes.js";
+// import centreRoutes from "./routes/centreRoutes.js";
 import formationRoutes from "./routes/formationRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
 import emargementRoutes from "./routes/emargementRoutes.js";

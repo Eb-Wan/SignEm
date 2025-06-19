@@ -8,7 +8,7 @@ const Redirect = () => {
   const [component, setComponent] = useState("")
   useEffect(() => {
     if (authLoading) setComponent(<Spinner />)
-    else if (!isLoggedIn) setComponent(<Navigate to="/login" />)
+    else if (!isLoggedIn && !authLoading) setComponent(<Navigate to="/login" />)
     else {
       if (role === "Administrateur") setComponent(<Navigate to="/administrateur" />)
       else if (role === "Formateur") setComponent(<Navigate to="/formateur" />)

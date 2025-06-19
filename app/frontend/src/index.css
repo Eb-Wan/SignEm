@@ -88,6 +88,7 @@ input, select, button {
 
 main {
   margin: 0;
+  margin-bottom: var(--marginMedium);
   padding: 0;
 }
 
@@ -114,6 +115,9 @@ header {
   font-size: var(--fontLarge);
   box-shadow: var(--shadowPrimary);
 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .buttonPrimary {

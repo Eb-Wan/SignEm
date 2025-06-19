@@ -10,7 +10,7 @@ const AuthChecker = ({ children, accessRole }) => {
     if (authLoading) setComponent(<Spinner />);
     else if (isLoggedIn && role===accessRole) setComponent(children);
     else if (isLoggedIn && !accessRole) setComponent(children);
-    else setComponent(<Navigate to="/login" />);
+    else setComponent(<Navigate to="/se-connecter" />);
   }, [isLoggedIn, authLoading]);
 
   return (

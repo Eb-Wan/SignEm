@@ -5,6 +5,7 @@ import { authMiddleware, isFormateur, isStagiaire } from "../middlewares/protect
 import { validateRequest } from "../middlewares/validatorMiddleware.js";
 import { emargementCreateValidator, emargementSignValidator } from "../validators/emargementValidation.js";
 import { get, create, sign } from "../controllers/emargementController.js";
+import limiter from "../middlewares/limiter.js";
 
 router.post("/:token", authMiddleware, isStagiaire, emargementSignValidator, validateRequest, sign);
 router.get("/:temps/:sessionId", authMiddleware, isFormateur, get);

@@ -16,6 +16,7 @@ import Logout from "./pages/Logout"
 import Unauthorized from "./pages/Unauthorized"
 import Redirect from "./pages/Redirect"
 import PageNotFound from "./pages/PageNotFound"
+import Privacy from "./pages/Privacy"
 
 function App() {
   return (
@@ -33,9 +34,10 @@ function App() {
                 <Route path="/formateur" element={ <AuthChecker accessRole="Formateur"><DashboardFormateur /></AuthChecker> } />
                 <Route path="/stagiaire" element={ <AuthChecker accessRole="Stagiaire"><DashboardStagiaire /></AuthChecker> } />
                 <Route path="/stagiaire/signer" element={ <AuthChecker accessRole="Stagiaire"><SignatureStagiaire /></AuthChecker> } />
-                <Route path="/login" element={ <Login/> } />
-                <Route path="/logout" element={ <AuthChecker><Logout/></AuthChecker> } />
-                <Route path="/unauthorized" element={ <Unauthorized/> } />
+                <Route path="/se-connecter" element={ <Login/> } />
+                <Route path="/se-deconnecter" element={ <AuthChecker><Logout/></AuthChecker> } />
+                <Route path="/confidentialitee" element={<Privacy />} />
+                <Route path="/non-autorise" element={ <Unauthorized/> } />
                 <Route path="*" element={<PageNotFound />}></Route>
               </Routes>
           </main>
