@@ -1,7 +1,7 @@
 import Exeption from "../classes/exeption.js";
 import compteModele from "../models/compteModele.js";
 import emargementModele from "../models/emargementModele.js";
-import { sendMultipleEmails } from "../services/sendgrid.js";
+import { sendMail } from "../services/nodemailer.js";
 import jwt from "jsonwebtoken";
 
 export const get = async (req, res, next) => {
@@ -9,7 +9,6 @@ export const get = async (req, res, next) => {
         const { temps, sessionId } = req.params;
         const start = new Date();
         const end = new Date();
-
         if (temps == "matin") {
             start.setHours(0, 0, 0, 0);
             end.setHours(11, 59, 59, 999);
@@ -37,7 +36,7 @@ export const create = async (req, res, next) => {
         const emargements = stagiaires.map(stagiaire => {
             return ({
                 formateurId: req.user._id,
-                formateurSignature: signature,
+                formateurSignature: signature.replace(/<script>/ig, '<p>').replace(/<\/script>/ig, '</p>'),
                 stagiaireId: stagiaire,
                 date: dateNow,
                 sessionId: req.user.sessionId
@@ -53,13 +52,14 @@ export const create = async (req, res, next) => {
 
         const token = jwt.sign({ emargementsIds: emargementsIds }, process.env.JWT_SECRET, { expiresIn: "30m" });
         const link = process.env.CORS_ORIGIN+"/stagiaire/signer?token="+token;
+        // console.log(link);
 
         const mailHtml = `
             <h1>Signature SignEm</h1>
             <p>Cliquez sur le lien suivant afin de signer votre fiche d'émargement: <a href="${link}">Signer !</a></p>
             <p>Merci et bonne journée !</p>
         `;
-        const result = await sendMultipleEmails(stagiairesEmails, "Lien de signature d'émargement SignEm", mailHtml);
+        const result = await sendMail("Lien de signature d'émargement SignEm", "Lien de signature d'émargement SignEm : "+link, mailHtml, stagiairesEmails);
         if (result !== true) throw new Exeption("550", result.message, true);
 
         res.status(200).json({ success: true });

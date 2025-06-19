@@ -8,6 +8,7 @@
 111:400 Veuillez signer dans le carré "signature";
 112:400 Veuillez cocher au moins un stagiaire;
 113:400 Cette fiche a déjà été signée par vous;
+114:400 Paramètres de requête requis;
 120:403 Test recaptcha échoué;
 130:400 Les mots de passe ne sont pas identiques;
 

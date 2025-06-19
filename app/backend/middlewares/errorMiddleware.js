@@ -25,6 +25,6 @@ export const errorMiddleware = (err, req, res, next) => {
         }
         statusCode = parseInt(statusCode) || 500;
     }
-    console.log(err, ", message: ", message, ", statusCode:", statusCode, " details:", err.details);
+    console.log(err, ", message: ", message, ", statusCode:", statusCode);
     res.status(statusCode).json({ success: false, message });
 };

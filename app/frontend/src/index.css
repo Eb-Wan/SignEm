@@ -745,5 +745,5 @@ textarea.formFieldInput {
   height: 300px;
   width: 300px;
   scale: 40%;
-  margin: -100px;
+  margin: -100px -80px;
 }

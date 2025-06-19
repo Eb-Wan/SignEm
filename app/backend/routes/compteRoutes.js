@@ -2,8 +2,9 @@ import express from "express";
 const router = express.Router();
 
 import { authMiddleware, isAdmin, isFormateur } from "../middlewares/protectMiddleware.js";
-// import { validateRegister, validateRequest } from "../middlewares/validatorMiddleware";
-import { createFirstAccount, login, logout, auth, userUpdate, adminRegister, adminUpdate, adminRemove, adminList, formateurList } from "../controllers/compteController.js";
+import { validateRequest } from "../middlewares/validatorMiddleware.js";
+import { compteRegisterValidator, compteUpdateValidator } from "../validators/compteValidation.js";
+import { login, logout, auth, adminRegister, adminUpdate, adminRemove, adminList, formateurList } from "../controllers/compteController.js";
 
 // router.post("/", createFirstAccount);
 
@@ -17,9 +18,8 @@ router.get("/logout", logout);
 router.get("/formateur/list", authMiddleware, isFormateur, formateurList);
 
 router.get("/admin/list", authMiddleware, isAdmin, adminList);
-//implémente validation
-router.post("/admin/", authMiddleware, isAdmin, adminRegister);
-router.put("/admin/:id", authMiddleware, isAdmin, adminUpdate);
+router.post("/admin/", authMiddleware, isAdmin, compteRegisterValidator, validateRequest, adminRegister);
+router.put("/admin/:id", authMiddleware, isAdmin, compteUpdateValidator, validateRequest, adminUpdate);
 router.delete("/admin/:id", authMiddleware, isAdmin, adminRemove);
 
 export default router;

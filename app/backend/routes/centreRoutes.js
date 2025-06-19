@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import { authMiddleware, isAdmin } from "../middlewares/protectMiddleware.js";
-// import { validateRegister, validateRequest } from "../middlewares/validatorMiddleware";
+// import { validateRequest } from "../middlewares/validatorMiddleware.js";
 import { find, create, update, remove } from "../controllers/centreController.js";
 
 //implémente validation

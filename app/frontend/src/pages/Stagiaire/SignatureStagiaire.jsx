@@ -23,8 +23,11 @@ const SignatureStagiaire = () => {
     event.preventDefault();
     setErrorMessage(false);
     try {
-      const signature = document.getElementById("signature").outerHTML;
-      await apiClient.post("/api/emargement/"+token, { signature }, { withCredentials: true });
+      const signature = document.createElement("svg");
+      signature.className="signature";
+      signature.innerHTML = document.getElementById("signature").innerHTML;
+
+      await apiClient.post("/api/emargement/"+token, { signature: signature.outerHTML }, { withCredentials: true });
       setInfoMessage("La fiche a bien été signée. Merci !");
     } catch (error) {
       const errorMessage = (error.response) ? error.response.data.message : error.message;

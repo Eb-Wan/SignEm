@@ -7,10 +7,7 @@ const compteShema = mongoose.Schema({
     tel: { type: String, required: true, unique: true },
     mdp: { type: String, required: true },
     role: { type: String, required: true, enum:["SansDroits", "Stagiaire", "Formateur", "Administrateur"], default: "SansDroits" },
-    sessionId: { type:String, default: "none" },
-    data: {
-        preferences: { type: String }
-    },
+    sessionId: { type:String, default: "none" }
 }, { timestamps: true });
 
 const compteModele = mongoose.model("comptes", compteShema);

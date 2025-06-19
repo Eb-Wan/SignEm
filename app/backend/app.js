@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:false }));
 app.use(cookieParser());
 app.use("/api/compte", compteRoutes);
-app.use("/api/centre", centreRoutes);
+// app.use("/api/centre", centreRoutes);
 app.use("/api/formation", formationRoutes);
 app.use("/api/session", sessionRoutes);
 app.use("/api/emargement", emargementRoutes);
