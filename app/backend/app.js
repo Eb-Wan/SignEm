@@ -35,7 +35,9 @@ app.use("/api/compte", compteRoutes);
 app.use("/api/formation", formationRoutes);
 app.use("/api/session", sessionRoutes);
 app.use("/api/emargement", emargementRoutes);
-
+app.get("/", (req, res) => {
+    res.status(200).json({ success: true, message: "Bienvue sur l'api SignEm. Veuillez consulter https://github.com/eb-wan/SignEm pou plus d'informations."});
+});
 app.use(errorMiddleware);
 
 const PORT = process.env.PORT;
