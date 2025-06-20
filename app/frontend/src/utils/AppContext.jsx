@@ -20,12 +20,12 @@ const Context = ({ children }) => {
     apiClient.get("/api/compte/auth", { withCredentials: true })
     .then(response => {
       if (response.data.isLoggedIn) {
-        setLoading(false);
         setLoggedIn(true);
         setRole(response.data.role);
         setNom(response.data.nom);
         setPrenom(response.data.prenom);
         setSession(response.data.session);
+        setLoading(false);
       } else {
         setLoading(false);
         setLoggedIn(false);
