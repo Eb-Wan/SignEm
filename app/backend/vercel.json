@@ -1,9 +1,8 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "app.js",
-        "use": "@now/node"
+    "functions": {
+      "app.js": {
+        "runtime": "nodejs18.x"
       }
-    ]
+    }
   }
+  
