@@ -14,9 +14,12 @@ const Login = () => {
   const [isWaiting, setWaiting] = useState(false);
   const [isLoading, setLoading] = useState(true)
 
+  const params = new URL(window.location.href).searchParams;
+  const redirection = params.get("redirection");
+
   useEffect(() => {
     if (authLoading) setLoading(true);
-    else if (isLoggedIn)  navigate("/");
+    else if (isLoggedIn)  navigate(redirection || "/");
     else setLoading(false);
   }, [isLoggedIn, authLoading]);
 

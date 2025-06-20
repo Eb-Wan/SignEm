@@ -33,7 +33,7 @@ function App() {
                 <Route path="/administrateur/sessions" element={ <AuthChecker accessRole="Administrateur"><SessionsAdministration /></AuthChecker> } />
                 <Route path="/formateur" element={ <AuthChecker accessRole="Formateur"><DashboardFormateur /></AuthChecker> } />
                 <Route path="/stagiaire" element={ <AuthChecker accessRole="Stagiaire"><DashboardStagiaire /></AuthChecker> } />
-                <Route path="/stagiaire/signer" element={ <AuthChecker accessRole="Stagiaire"><SignatureStagiaire /></AuthChecker> } />
+                <Route path="/stagiaire/signer/:token" element={ <AuthChecker accessRole="Stagiaire"><SignatureStagiaire /></AuthChecker> } />
                 <Route path="/se-connecter" element={ <Login/> } />
                 <Route path="/se-deconnecter" element={ <AuthChecker><Logout/></AuthChecker> } />
                 <Route path="/confidentialitee" element={<Privacy />} />

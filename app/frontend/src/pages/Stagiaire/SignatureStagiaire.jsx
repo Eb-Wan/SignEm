@@ -3,16 +3,16 @@ import { useAppContext } from "../../utils/AppContext"
 import Signature from '@uiw/react-signature';
 import apiClient from "../../AxiosConfig";
 import Login from "../Login";
+import { useParams } from "react-router-dom";
 
 const SignatureStagiaire = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [infoMessage, setInfoMessage] = useState("");
   const { isLoggedIn, nom, prenom } = useAppContext();
   const signatureRef = useRef(null);
+  const params = useParams();
 
-
-  const params = new URL(window.location.href).searchParams;
-  const token = params.get("token");
+  const token = params.token;
 
   useEffect(()=> {
     if (!token) setErrorMessage("Aucun jeton de signature n'a été récupéré.");
