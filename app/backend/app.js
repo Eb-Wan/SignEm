@@ -12,7 +12,6 @@ const app = express();
 import Exeption from "./classes/exeption.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import { connectDB } from "./config/db.js";
-// import cloudinaryConfig from "./config/cloudinary";
 import compteRoutes from "./routes/compteRoutes.js";
 // import centreRoutes from "./routes/centreRoutes.js";
 import formationRoutes from "./routes/formationRoutes.js";
@@ -40,11 +39,9 @@ app.get("/", (req, res) => {
 });
 app.use(errorMiddleware);
 
-export default app;
-
-// const PORT = process.env.PORT;
-// if (PORT) app.listen(PORT, () => console.log("Server is listening on port", PORT));
-// else {
-//     console.error(new Exeption("Dotenv has not been configured"));
-//     process.exit(1);
-// }
+const PORT = process.env.PORT;
+if (PORT) app.listen(PORT, () => console.log("Server is listening on port", PORT));
+else {
+    console.error(new Exeption("Dotenv has not been configured"));
+    process.exit(1);
+}
