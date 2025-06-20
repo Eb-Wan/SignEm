@@ -53,7 +53,7 @@ export const login = async (req, res, next) => {
         const { email, mdp, captchaToken } = req.body;
 
         const isProd = process.env.PROD_ENV === "true";
-        const captchaUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET}&response=${captchaToken}`;
+        const captchaUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_KEY}&response=${captchaToken}`;
         const captcha = await axios.post(captchaUrl);
 
         if (!captcha.data.success && isProd) throw new Exeption("120", "", true);
