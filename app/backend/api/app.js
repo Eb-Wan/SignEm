@@ -40,9 +40,11 @@ app.get("/", (req, res) => {
 });
 app.use(errorMiddleware);
 
-const PORT = process.env.PORT;
-if (PORT) app.listen(PORT, () => console.log("Server is listening on port", PORT));
-else {
-    console.error(new Exeption("Dotenv has not been configured"));
-    process.exit(1);
-}
+export default app;
+
+// const PORT = process.env.PORT;
+// if (PORT) app.listen(PORT, () => console.log("Server is listening on port", PORT));
+// else {
+//     console.error(new Exeption("Dotenv has not been configured"));
+//     process.exit(1);
+// }
