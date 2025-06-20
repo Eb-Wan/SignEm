@@ -14,12 +14,12 @@ const Login = () => {
   const [isWaiting, setWaiting] = useState(false);
   const [isLoading, setLoading] = useState(true)
 
-  const params = new URL(window.location.href).searchParams;
-  const redirection = params.get("redirection");
-
   useEffect(() => {
     if (authLoading) setLoading(true);
-    else if (isLoggedIn)  navigate(redirection || "/");
+    else if (isLoggedIn) {
+      const params = new URL(window.location.href).searchParams;
+      navigate(params.get("redirection") || "/");
+    }
     else setLoading(false);
   }, [isLoggedIn, authLoading]);
 
@@ -36,7 +36,8 @@ const Login = () => {
     try {
       setWaiting(true);
       await apiClient.post("/api/compte/login", {...data, captchaToken}, { withCredentials: true });
-      navigate("/");
+      const params = new URL(window.location.href).searchParams;
+      navigate(params.get("redirection") || "/");
     } catch (error) {
       const message = (error.response && error.response.data.message) ? error.response.data.message : error.message;
       console.error(error);

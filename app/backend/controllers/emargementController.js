@@ -51,7 +51,7 @@ export const create = async (req, res, next) => {
         const stagiairesEmails = stagiairesResults.map(e => e.email);
 
         const token = jwt.sign({ emargementsIds: emargementsIds }, process.env.JWT_SECRET, { expiresIn: "30m" });
-        const link = process.env.CORS_ORIGIN+"/stagiaire/signer?token="+token;
+        const link = process.env.CORS_ORIGIN+"/stagiaire/signer/"+token;
         // console.log(link);
 
         const mailHtml = `
