@@ -38,10 +38,6 @@ const Context = ({ children }) => {
         setLoggedIn(false);
         setRole("");  
       });
-      setTimeout(() => {
-        setLoading(false);
-        refreshState();
-      } ,5000);
     }
   }
   useEffect(refreshState, [location]);
