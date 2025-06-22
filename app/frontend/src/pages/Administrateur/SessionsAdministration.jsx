@@ -66,7 +66,7 @@ const DashBoard = () => {
           </span>
           <span className="row alignCenter">
             <span title="Aujourd'hui" className="lnr lnr-calendar-full mm"></span>
-            <span className="capitalize">{ new Date(Date.now()).toLocaleDateString("fr-FR", dateOptions) }</span>
+            <span className="capitalize">{ new Date().toLocaleDateString("fr-FR", dateOptions) }</span>
           </span>
       </div>
 

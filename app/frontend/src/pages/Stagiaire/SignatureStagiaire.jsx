@@ -51,7 +51,7 @@ const SignatureStagiaire = () => {
       <title>SignEm - Signature Stagiaire</title>
       <div className="title w100 row justifyBetween mobileColumn">
           <span className="row alignCenter"><span title="Compte" className="lnr lnr-user mm"></span><span className="uppercase">{ nom }</span> &nbsp; { prenom }</span>
-          <span className="row alignCenter"><span title="Aujourd'hui" className="lnr lnr-calendar-full mm"></span><span className="capitalize">{ new Date(Date.now()).toLocaleDateString("fr-FR", dateOptions) }</span></span>
+          <span className="row alignCenter"><span title="Aujourd'hui" className="lnr lnr-calendar-full mm"></span><span className="capitalize">{ new Date().toLocaleDateString("fr-FR", dateOptions) }</span></span>
       </div>
       { infoMessage ? <p className="successMessage">{ infoMessage }</p> : "" }
       { errorMessage ? <p className="errorMessage" id="errorMessage">{ errorMessage }</p> : "" }

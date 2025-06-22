@@ -8,7 +8,7 @@ import { get, create, sign } from "../controllers/emargementController.js";
 import limiter from "../middlewares/limiter.js";
 
 router.post("/:token", authMiddleware, isStagiaire, emargementSignValidator, validateRequest, sign);
-router.get("/:temps/:sessionId", authMiddleware, isFormateur, get);
+router.get("/:sessionId", authMiddleware, isFormateur, get);
 router.post("/", limiter, authMiddleware, isFormateur, emargementCreateValidator, validateRequest, create);
 
 export default router;

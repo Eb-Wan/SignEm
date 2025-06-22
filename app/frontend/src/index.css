@@ -362,6 +362,7 @@ header {
 .textSmall { font-size: var(--fontSmall) !important; }
 .textMedium { font-size: var(--fontMedium) !important; }
 .textLarge { font-size: var(--fontLarge) !important; }
+.textLarger { font-size: var(--fontLarger) !important; }
 
 .textBold { font-weight: bold; }
 

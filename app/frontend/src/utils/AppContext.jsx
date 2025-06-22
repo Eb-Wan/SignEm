@@ -16,27 +16,29 @@ const Context = ({ children }) => {
   const [prenom, setPrenom] = useState("");
 
   useEffect(() => {
-    setLoading(true);
-    apiClient.get("/api/compte/auth", { withCredentials: true })
-    .then(response => {
-      if (response.data.isLoggedIn) {
-        setLoggedIn(true);
-        setRole(response.data.role);
-        setNom(response.data.nom);
-        setPrenom(response.data.prenom);
-        setSession(response.data.session);
-        setLoading(false);
-      } else {
+    if (!authLoading) {
+      setLoading(true);
+      apiClient.get("/api/compte/auth", { withCredentials: true })
+      .then(response => {
+        if (response.data.isLoggedIn) {
+          setLoggedIn(true);
+          setRole(response.data.role);
+          setNom(response.data.nom);
+          setPrenom(response.data.prenom);
+          setSession(response.data.session);
+          setLoading(false);
+        } else {
+          setLoading(false);
+          setLoggedIn(false);
+          setRole("");    
+        }
+      })
+      .catch(error => {
         setLoading(false);
         setLoggedIn(false);
-        setRole("");    
-      }
-    })
-    .catch(error => {
-      setLoading(false);
-      setLoggedIn(false);
-      setRole("");
-    });
+        setRole("");
+      });
+    }
   }, [location]);
   return (
     <>

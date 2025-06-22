@@ -6,22 +6,15 @@ import jwt from "jsonwebtoken";
 
 export const get = async (req, res, next) => {
     try {
-        const { temps, sessionId } = req.params;
-        const start = new Date();
-        const end = new Date();
-        if (temps == "matin") {
-            start.setHours(0, 0, 0, 0);
-            end.setHours(11, 59, 59, 999);
-        } else if (temps == "aprem") {
-            end.setHours(23, 59, 59, 999);
-            start.setHours(12, 0, 0, 0);
-        }
-        else throw new Exeption("020", "", true);
+        const { sessionId } = req.params;
+        let { dateDebut, dateFin } = req.query;
+        if (!dateDebut) dateDebut = (new Date).setHours(0,0,0,0);
+        if (!dateFin) dateFin = (new Date).setHours(23, 59, 59, 999);
 
         const emargements = await emargementModele.find({
-            date: { $gte: start, $lte: end },
+            date: { $gte: dateDebut, $lte: dateFin },
             sessionId
-        });
+        }).sort({ date: -1 });
         res.status(200).json({ success: true, emargements });
     } catch (error) {
         next(error);
