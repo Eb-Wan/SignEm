@@ -15,7 +15,7 @@ const Context = ({ children }) => {
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
 
-  useEffect(() => {
+  const refreshState = () => {
     if (!authLoading) {
       setLoading(true);
       apiClient.get("/api/compte/auth", { withCredentials: true })
@@ -30,16 +30,21 @@ const Context = ({ children }) => {
         } else {
           setLoading(false);
           setLoggedIn(false);
-          setRole("");    
+          setRole("");  
         }
       })
       .catch(error => {
         setLoading(false);
         setLoggedIn(false);
-        setRole("");
+        setRole("");  
       });
+      setTimeout(() => {
+        setLoading(false);
+        refreshState();
+      } ,5000);
     }
-  }, [location]);
+  }
+  useEffect(refreshState, [location]);
   return (
     <>
       <AppContext.Provider value={{ authLoading, isLoggedIn, role, nom, prenom, sessionId }}>
