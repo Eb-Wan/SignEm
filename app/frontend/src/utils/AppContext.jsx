@@ -16,7 +16,7 @@ const Context = ({ children }) => {
   const [prenom, setPrenom] = useState("");
 
   const refreshState = () => {
-    if (!authLoading) {
+    if (!authLoading || !isLoggedIn) {
       setLoading(true);
       apiClient.get("/api/compte/auth", { withCredentials: true })
       .then(response => {
