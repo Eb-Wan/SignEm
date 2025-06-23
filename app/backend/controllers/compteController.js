@@ -137,6 +137,7 @@ export const adminUpdate = async (req, res, next) => {
 
         if (!(nom && prenom && email && tel && role && sessionId)) throw new Exeption("110", "", true);
         const user = await compteModele.findByIdAndUpdate(id, { nom, prenom, email, tel, role, sessionId });
+        if (user.email == process.env.SUPER_ADMIN) throw new Exeption("241", req.user.email+" attempted to remove the super admin", true)
         if (!user) throw new Exeption("401", "", true);
         res.status(200).json({ success: true });
     } catch (error) {
@@ -150,6 +151,7 @@ export const adminRemove = async (req, res, next) => {
         const { id } = req.params;
 
         const user = await compteModele.findById(id);
+        if (user.email == process.env.SUPER_ADMIN) throw new Exeption("241", req.user.email+" attempted to remove the super admin", true)
         if (!user) throw new Exeption("401" , "", true);
         await compteModele.findByIdAndDelete(id);
         res.status(200).json({ success: true });

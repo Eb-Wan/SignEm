@@ -19,6 +19,7 @@
 231:400 Formation déjà existante;
 232:400 Session déjà existante;
 240:403 Vous n'avez pas les droits d'accès;
+241:403 Interdiction de modifier ou supprimer le compte super administrateur;
 250:400 Jeton d'authentification invalide;
 
 
