@@ -303,6 +303,7 @@ header {
   line-height: 2px;
   margin: 0;
   padding: 0;
+  width: max-content;
 }
 
 .windowButtons {
